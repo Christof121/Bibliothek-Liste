@@ -18,13 +18,6 @@ namespace Bibliothek_Liste
         {
             bool menue = true;
 
-            string uiBookAddTitel = "";
-            string uiBookAddAuthor = "";
-            string uiConfirmBookAdd = "";
-
-            string uiBookRemoveTitel = "";
-            string uiConfirmBookRemove = "";
-
             Console.Title = "Bibliothek";
 
             List<Buch> buecher_inventar = new List<Buch>() {
@@ -51,6 +44,7 @@ namespace Bibliothek_Liste
             new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
             new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
+
             // Bücher sortieren
             buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
 
@@ -64,6 +58,7 @@ namespace Bibliothek_Liste
                 Console.WriteLine(item.Titel);
             }
             */
+
             List<Buch> buecher_ausgeliehen = new List<Buch>();
 
             do
@@ -106,6 +101,10 @@ namespace Bibliothek_Liste
 
                     case "2":
                         Console.Clear();
+
+                        string uiBookAddTitel = "";
+                        string uiBookAddAuthor = "";
+                        string uiConfirmBookAdd = "";
 
                         Console.WriteLine($"Buch hinzufügen");
                         Console.WriteLine($"==================================================");
@@ -247,6 +246,8 @@ namespace Bibliothek_Liste
                         break;
 
                     case "6":
+                        string uiBookRemoveTitel = "";
+
                         Console.WriteLine($"Buch Löschen");
                         Console.WriteLine($"==================================================");
                         Console.WriteLine("");
