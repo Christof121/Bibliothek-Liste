@@ -248,7 +248,7 @@ namespace Bibliothek_Liste
                         Console.WriteLine("");
                         Console.Write("Eingabe: ");
                         uiBookRemoveTitel = Console.ReadLine().ToLower();
-                        bool buchgefunden = false;
+                        buchgefunden = false;
                         if (!string.IsNullOrEmpty(uiBookRemoveTitel))
                         {
                             for (int i = 0; i < buecher_inventar.Count; i++)
