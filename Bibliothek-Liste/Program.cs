@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Bibliothek_Liste
 {
     class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
-    {   // Eigenschaften 'Titel' und 'Author'werden erstellt. 
+    {   // Eigenschaften 'Titel' und 'Author' werden erstellt. 
         // 'get; set;' erstellt die Getter- und Setter-Methoden, 
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
         public string Titel { get; set; }
