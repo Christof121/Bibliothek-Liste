@@ -19,8 +19,28 @@ namespace Bibliothek_Liste
             Console.Title = "Bibliothek";
 
             List<Buch> buecher = new List<Buch>() {
-                new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller"},
-                new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller"}
+            new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller"},
+            new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller"},
+            new Buch() { Titel = "Der Herr der Ringe", Author = "J.R.R. Tolkien" },
+            new Buch() { Titel = "Stolz und Vorurteil", Author = "Jane Austen" },
+            new Buch() { Titel = "1984", Author = "George Orwell" },
+            new Buch() { Titel = "Die Verwandlung", Author = "Franz Kafka" },
+            new Buch() { Titel = "Faust", Author = "Johann Wolfgang von Goethe" },
+            new Buch() { Titel = "Harry Potter und der Stein der Weisen", Author = "J.K. Rowling" },
+            new Buch() { Titel = "Der Schatten des Windes", Author = "Carlos Ruiz Zafón" },
+            new Buch() { Titel = "Der Alchimist", Author = "Paulo Coelho" },
+            new Buch() { Titel = "Das Parfum", Author = "Patrick Süskind" },
+            new Buch() { Titel = "Krieg und Frieden", Author = "Leo Tolstoi" },
+            new Buch() { Titel = "Der Fänger im Roggen", Author = "J.D. Salinger" },
+            new Buch() { Titel = "Die unendliche Geschichte", Author = "Michael Ende" },
+            new Buch() { Titel = "Moby Dick", Author = "Herman Melville" },
+            new Buch() { Titel = "Der kleine Prinz", Author = "Antoine de Saint-Exupéry" },
+            new Buch() { Titel = "Die Säulen der Erde", Author = "Ken Follett" },
+            new Buch() { Titel = "Sakrileg", Author = "Dan Brown" },
+            new Buch() { Titel = "Per Anhalter durch die Galaxis", Author = "Douglas Adams" },
+            new Buch() { Titel = "Der Medicus", Author = "Noah Gordon" },
+            new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
+            new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
 
             do
@@ -30,6 +50,34 @@ namespace Bibliothek_Liste
 
 
                 #endregion Menue
+
+                string Auswahl = Console.ReadLine();
+                Auswahl = Auswahl.ToLower();
+                switch (Auswahl)
+                {
+                    case "1":
+
+                        break;
+
+                    case "2":
+                        break;
+
+                    case "3":
+                        break;
+
+                    case "4":
+                        break;
+
+                    case "5":
+                        break;
+
+                    case "6":
+                        break;
+
+                    case "x":
+                        break;
+
+                };
                 Console.ReadLine();
             } while (true);
         }
