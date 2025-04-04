@@ -22,6 +22,9 @@ namespace Bibliothek_Liste
             string uiBookAddAuthor = "";
             string uiConfirmBookAdd = "";
 
+            string uiBookRemoveTitel = "";
+            string uiConfirmBookRemove = "";
+
             Console.Title = "Bibliothek";
 
             List<Buch> buecher_inventar = new List<Buch>() {
@@ -159,6 +162,42 @@ namespace Bibliothek_Liste
                         break;
 
                     case "6":
+                        Console.WriteLine($"Buch Löschen");
+                        Console.WriteLine($"==================================================");
+                        Console.WriteLine("");
+                        Console.WriteLine("Welchen Buchtitel möchten Sie löschen? (Titel muss exact uebereinstimmen)");
+                        Console.WriteLine("");
+                        Console.Write("Eingabe: ");
+                        uiBookRemoveTitel = Console.ReadLine();
+                        int index = buecher_inventar.FindIndex(e => e.Titel == uiBookRemoveTitel);
+                        Console.WriteLine("");
+                        if (index == -1) {
+                            Console.WriteLine("Es wurde kein Buch mit dem Titel gefunden");
+                            break;
+                        }
+                        Console.WriteLine("");
+                        Console.WriteLine("Folgendes Buch wurde gefunden");
+                        Console.WriteLine($"{buecher_inventar[index].Titel}");
+                        Console.WriteLine($"{buecher_inventar[index].Author}");
+                        Console.WriteLine("");
+                        Console.Write("Soll das Buch gelöscht werden? [y/n]");
+                        uiConfirmBookRemove = Console.ReadLine();
+                        switch (uiConfirmBookRemove)
+                        {
+                            case "y":
+                                buecher_inventar.RemoveAt(index);
+                                Console.WriteLine("");
+                                Console.WriteLine("Das Buch wurde erfolgreich gelöscht");
+                                break;
+                            case "n":
+                                uiBookRemoveTitel = "";
+                                Console.WriteLine("Es wurde kein Buch gelöscht");
+                                break;
+                            default:
+                                Console.WriteLine("Eingabe fehlerhaft");
+                                break;
+                        }
+                        //buecher_inventar.Remove(uiBookRemoveTitel);
                         break;
 
                     case "x":
