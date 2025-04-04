@@ -92,6 +92,7 @@ namespace Bibliothek_Liste
                 {
                     // Fall 1: Bücher im Inventar ansehen
                     case "1":
+
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
                         // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
@@ -108,12 +109,8 @@ namespace Bibliothek_Liste
 
                     // Fall 2: Neues Buch hinzufügen
                     case "2":
+
                         Console.Clear();
-
-                        string uiBookAddTitel = "";
-                        string uiBookAddAuthor = "";
-                        string uiConfirmBookAdd = "";
-
                         Console.WriteLine($"Buch hinzufügen");
                         Console.WriteLine($"==================================================");
                         Console.WriteLine("");
@@ -121,10 +118,10 @@ namespace Bibliothek_Liste
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Buchtitel an: ");
-                        uiBookAddTitel = Console.ReadLine();
+                       string uiBookAddTitel = Console.ReadLine();
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Author an: ");
-                        uiBookAddAuthor = Console.ReadLine();
+                         string uiBookAddAuthor = Console.ReadLine();
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.WriteLine($"Folgendes Buch wird hinzugefügt");
@@ -135,7 +132,7 @@ namespace Bibliothek_Liste
 
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
-                        uiConfirmBookAdd = Console.ReadLine();
+                        string uiConfirmBookAdd = Console.ReadLine();
                         switch (uiConfirmBookAdd)
                         {
                             case "y":
@@ -159,6 +156,7 @@ namespace Bibliothek_Liste
 
                     // Fall 3: Buch ausleihen
                     case "3":
+
                         // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
                         bool buchgefunden = false;
                         Console.Clear();
@@ -218,6 +216,7 @@ namespace Bibliothek_Liste
 
                     // Fall 4: Buch zurückgeben
                     case "4":
+
                         buchgefunden = false;
                         Console.Clear();
                         Console.Write("Suche nach einem Buch: ");
@@ -269,6 +268,7 @@ namespace Bibliothek_Liste
 
                     // Fall 5: Ausgeliehene Bücher anzeigen
                     case "5":
+
                         Console.Clear();
                         Console.WriteLine("\nAusgeliehene Buecher:");
                         Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
@@ -283,6 +283,7 @@ namespace Bibliothek_Liste
 
                     // Fall 6: Buch dauerhaft aus dem Inventar entfernen
                     case "6":
+
                         string uiBookRemoveTitel = "";
                         Console.Clear();
                         Console.WriteLine($"Buch Löschen");
@@ -372,6 +373,7 @@ namespace Bibliothek_Liste
 
                     // Fall x: Programm beenden
                     case "x":
+
                         Console.WriteLine("");
                         Console.WriteLine("Das Programm wurde beendet");
                         menue = false;
