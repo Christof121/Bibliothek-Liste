@@ -137,9 +137,88 @@ namespace Bibliothek_Liste
                         break;
 
                     case "3":
+                        bool buchgefunden = false;
+                        Console.Clear();
+                        Console.Write("Suche nach einem Buch: ");
+                        string suche = Console.ReadLine().ToLower();
+                        if (!string.IsNullOrEmpty(suche))
+                        {
+                            for (int i = 0; i < buecher_inventar.Count; i++)
+                            {
+                                if (buecher_inventar[i].Titel.ToLower().Contains(suche))
+                                {
+                                    buchgefunden = true;
+
+                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                                    Console.WriteLine("____________________________________________________________________");
+                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
+                                    Console.WriteLine("\nWollen sie dieses Buch ausleihen y/n:");
+                                    string auswahlverschieben = Console.ReadLine();
+
+                                    if (auswahlverschieben=="y")
+                                    {
+                                        buecher_ausgeliehen.Add(buecher_inventar[i]);
+                                        buecher_inventar.RemoveAt(i);
+                                        Console.WriteLine("Buch wurde ausgeliehen");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Buch nicht ausgeliehen");
+                                    }
+                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                    Console.ReadKey();
+                                }
+                            }
+                            if (!buchgefunden)
+                            {
+                                Console.WriteLine("\nBuch nicht gefunden.");
+                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                Console.ReadKey();
+                            }
+                        }
                         break;
 
                     case "4":
+                        buchgefunden = false;
+                        Console.Clear();
+                        Console.Write("Suche nach einem Buch: ");
+                        suche = "";
+                        suche = Console.ReadLine().ToLower();
+                        if (!string.IsNullOrEmpty(suche))
+                        {
+                            for (int i = 0; i < buecher_ausgeliehen.Count; i++)
+                            {
+                                if (buecher_ausgeliehen[i].Titel.ToLower().Contains(suche))
+                                {
+                                    buchgefunden = true;
+
+                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                                    Console.WriteLine("____________________________________________________________________");
+                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_ausgeliehen[i].Titel, buecher_ausgeliehen[i].Author);
+                                    Console.WriteLine("\nWollen sie dieses Buch ausleihen y/n:");
+                                    string auswahlverschieben = Console.ReadLine();
+
+                                    if (auswahlverschieben == "y")
+                                    {
+                                        buecher_inventar.Add(buecher_ausgeliehen[i]);
+                                        buecher_ausgeliehen.RemoveAt(i);
+                                        Console.WriteLine("Buch wurde ausgeliehen");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Buch nicht ausgeliehen");
+                                    }
+                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                    Console.ReadKey();
+                                }
+                            }
+                            if (!buchgefunden)
+                            {
+                                Console.WriteLine("\nBuch nicht gefunden.");
+                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                Console.ReadKey();
+                            }
+                        }
                         break;
 
                     case "5":
