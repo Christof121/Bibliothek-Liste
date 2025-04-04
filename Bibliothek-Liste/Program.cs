@@ -93,6 +93,42 @@ namespace Bibliothek_Liste
                         break;
 
                     case "2":
+                        Console.Clear();
+
+                        Console.WriteLine($"Buch hinzufügen");
+                        Console.WriteLine($"==================================================");
+                        Console.WriteLine("");
+                        Console.WriteLine("Fügen Sie ein Buch dem Inventar hinzu.");
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                        Console.Write($"Geben Sie den Buchtitel an: ");
+                        uiBookAddTitel = Console.ReadLine();
+                        Console.WriteLine("");
+                        Console.Write($"Geben Sie den Author an: ");
+                        uiBookAddAuthor = Console.ReadLine();
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                        Console.WriteLine($"Folgendes Buch wird hinzugefügt");
+                        Console.WriteLine($"Buchtitel: {uiBookAddTitel}");
+                        Console.WriteLine($"Buchauthor: {uiBookAddAuthor}");
+                        Console.WriteLine("");
+                        Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
+                        uiConfirmBookAdd = Console.ReadLine();
+                        switch (uiConfirmBookAdd)
+                        {
+                            case "y":
+                                buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
+                                Console.WriteLine("");
+                                Console.WriteLine("Das Buch wurde erfolgreich hinzugefügt");
+                                break;
+                            case "n":
+                                uiBookAddAuthor = "";
+                                uiBookAddTitel = "";
+                                Console.WriteLine("Es wurde kein Buch hinzugefügt");
+                                break;
+                            default:
+                                break;
+                        }
                         break;
 
                     case "3":
