@@ -51,6 +51,9 @@ namespace Bibliothek_Liste
             new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
             new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
+            // Bücher sortieren
+            buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
+
             //Console.WriteLine(buecher[1].Author);
 
             /*
@@ -118,8 +121,11 @@ namespace Bibliothek_Liste
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.WriteLine($"Folgendes Buch wird hinzugefügt");
-                        Console.WriteLine($"Buchtitel: {uiBookAddTitel}");
-                        Console.WriteLine($"Buchauthor: {uiBookAddAuthor}");
+
+                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                        Console.WriteLine("____________________________________________________________________");
+                        Console.WriteLine("{0,-40} | {1,-9}", uiBookAddTitel, uiBookAddAuthor);
+
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
                         uiConfirmBookAdd = Console.ReadLine();
