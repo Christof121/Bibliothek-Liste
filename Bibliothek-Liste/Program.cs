@@ -80,7 +80,16 @@ namespace Bibliothek_Liste
                 {
                     
                     case "1": //Buecher ansehen
-
+                        Console.Clear();
+                        Console.WriteLine("\nBuecher Inventar:");
+                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                        Console.WriteLine("____________________________________________________________________");
+                        foreach (var buch in buecher_inventar)
+                        {
+                            Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
+                        }
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
                         break;
 
                     case "2":
