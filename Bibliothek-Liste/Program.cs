@@ -52,6 +52,8 @@ namespace Bibliothek_Liste
                 Console.WriteLine(item.Titel);
             }
             */
+            List<Buch> buecher_ausgeliehen = new List<Buch>();
+
             do
             {
                 #region Menue
