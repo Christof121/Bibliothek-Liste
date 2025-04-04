@@ -16,6 +16,7 @@ namespace Bibliothek_Liste
     {
         static void Main(string[] args)
         {
+            bool menue = true;
 
             string uiBookAddTitel = "";
             string uiBookAddAuthor = "";
@@ -161,6 +162,9 @@ namespace Bibliothek_Liste
                         break;
 
                     case "x":
+                        Console.WriteLine("");
+                        Console.WriteLine("Das Programm wurde beendet");
+                        menue = false;
                         break;
 
                     default:
@@ -173,7 +177,7 @@ namespace Bibliothek_Liste
                 Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
                 Console.ReadKey();
                 Console.Clear();
-            } while (true);
+            } while (menue);
         }
     }
 }
