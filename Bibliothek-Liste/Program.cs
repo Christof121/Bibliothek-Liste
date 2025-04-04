@@ -43,6 +43,15 @@ namespace Bibliothek_Liste
             new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
             //Console.WriteLine(buecher[1].Author);
+
+            /*
+            buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
+
+            foreach (var item in buecher_inventar)
+            {
+                Console.WriteLine(item.Titel);
+            }
+            */
             do
             {
                 #region Menue
@@ -57,37 +66,55 @@ namespace Bibliothek_Liste
                 Console.WriteLine($"6) Buecher entfernen");
                 Console.WriteLine();
                 Console.WriteLine($"x) Ende");
-
+                Console.WriteLine($"==================================================");
+                Console.WriteLine();
                 #endregion Menue
+
+                Console.Write("Ihre Auswahl: ");
 
                 string Auswahl = Console.ReadLine();
                 Auswahl = Auswahl.ToLower();
                 switch (Auswahl)
                 {
+                    #region Buech ansehen
                     case "1":
 
                         break;
-
+                    #endregion
+                    #region Buch hinzufuegen
                     case "2":
                         break;
-
+                    #endregion
+                    #region Buech ausleihen
                     case "3":
                         break;
-
+                    #endregion
+                    #region Buech zurueckgeben
                     case "4":
                         break;
-
+                    #endregion
+                    #region Ausgeliehende Bücher ausgeben
                     case "5":
                         break;
-
+                    #endregion
+                    #region Buecher entfernen
                     case "6":
                         break;
-
+                    #endregion
+                    #region Programm beenden
                     case "x":
                         break;
-
+                    #endregion
+                    default:
+                        Console.WriteLine($"");
+                        Console.WriteLine("Eingabe Fehlerhaft");
+                        Console.WriteLine("Bitte wiederholen Sie ihre Eingabe.");
+                        break;
                 };
-                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
+                Console.ReadKey();
+                Console.Clear();
             } while (true);
         }
     }
