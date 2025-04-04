@@ -102,6 +102,16 @@ namespace Bibliothek_Liste
                         break;
 
                     case "5":
+                        Console.Clear();
+                        Console.WriteLine("\nAusgeliehene Buecher:");
+                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                        Console.WriteLine("____________________________________________________________________");
+                        foreach (var buch in buecher_ausgeliehen)
+                        {
+                            Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
+                        }
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
                         break;
 
                     case "6":
