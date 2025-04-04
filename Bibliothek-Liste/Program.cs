@@ -18,7 +18,7 @@ namespace Bibliothek_Liste
         {
             Console.Title = "Bibliothek";
 
-            List<Buch> buecher = new List<Buch>() {
+            List<Buch> buecher_inventar = new List<Buch>() {
             new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller"},
             new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller"},
             new Buch() { Titel = "Der Herr der Ringe", Author = "J.R.R. Tolkien" },
