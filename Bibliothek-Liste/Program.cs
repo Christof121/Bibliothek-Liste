@@ -42,12 +42,21 @@ namespace Bibliothek_Liste
             new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
             new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
-
+            //Console.WriteLine(buecher[1].Author);
             do
             {
                 #region Menue
-                Console.WriteLine(buecher[1].Author);
 
+                Console.WriteLine($"Bibliotheke");
+                Console.WriteLine($"==================================================");
+                Console.WriteLine($"1) Bücher ansehen");
+                Console.WriteLine($"2) Bücher anfuegen");
+                Console.WriteLine($"3) Bücher ausleihen");
+                Console.WriteLine($"4) Bücher zurueckgeben");
+                Console.WriteLine($"5) Ausgeliehende Buecher ausgeben");
+                Console.WriteLine($"6) Buecher entfernen");
+                Console.WriteLine();
+                Console.WriteLine($"x) Ende");
 
                 #endregion Menue
 
