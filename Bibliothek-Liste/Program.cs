@@ -76,35 +76,29 @@ namespace Bibliothek_Liste
                 Auswahl = Auswahl.ToLower();
                 switch (Auswahl)
                 {
-                    #region Buech ansehen
-                    case "1":
+                    
+                    case "1": //Buecher ansehen
 
                         break;
-                    #endregion
-                    #region Buch hinzufuegen
+
                     case "2":
                         break;
-                    #endregion
-                    #region Buech ausleihen
+
                     case "3":
                         break;
-                    #endregion
-                    #region Buech zurueckgeben
+
                     case "4":
                         break;
-                    #endregion
-                    #region Ausgeliehende Bücher ausgeben
+
                     case "5":
                         break;
-                    #endregion
-                    #region Buecher entfernen
+
                     case "6":
                         break;
-                    #endregion
-                    #region Programm beenden
+
                     case "x":
                         break;
-                    #endregion
+
                     default:
                         Console.WriteLine($"");
                         Console.WriteLine("Eingabe Fehlerhaft");
