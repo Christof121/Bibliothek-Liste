@@ -165,9 +165,46 @@ namespace Bibliothek_Liste
                         Console.WriteLine($"Buch Löschen");
                         Console.WriteLine($"==================================================");
                         Console.WriteLine("");
-                        Console.WriteLine("Welchen Buchtitel möchten Sie löschen? (Titel muss exact uebereinstimmen)");
+                        Console.WriteLine("Welchen Buchtitel möchten Sie löschen?");
                         Console.WriteLine("");
                         Console.Write("Eingabe: ");
+                        uiBookRemoveTitel = Console.ReadLine().ToLower();
+                        bool buchgefunden = false;
+                        if (!string.IsNullOrEmpty(uiBookRemoveTitel))
+                        {
+                            for (int i = 0; i < buecher_inventar.Count; i++)
+                            {
+                                if (buecher_inventar[i].Titel.ToLower().Contains(uiBookRemoveTitel))
+                                {
+                                    buchgefunden = true;
+
+                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                                    Console.WriteLine("____________________________________________________________________");
+                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
+                                    Console.WriteLine("\nWollen sie dieses Buch löschen? y/n:");
+                                    string auswahlloeschen = Console.ReadLine();
+
+                                    if (auswahlloeschen == "y")
+                                    {
+                                        buecher_inventar.RemoveAt(i);
+                                        Console.WriteLine("Buch wurde gelöscht");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Buch nicht gelöscht");
+                                    }
+                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                    Console.ReadKey();
+                                }
+                            }
+                            if (!buchgefunden)
+                            {
+                                Console.WriteLine("\nBuch nicht gefunden.");
+                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                Console.ReadKey();
+                            }
+                        }
+                        /*
                         uiBookRemoveTitel = Console.ReadLine();
                         int index = buecher_inventar.FindIndex(e => e.Titel == uiBookRemoveTitel);
                         Console.WriteLine("");
@@ -198,6 +235,7 @@ namespace Bibliothek_Liste
                                 break;
                         }
                         //buecher_inventar.Remove(uiBookRemoveTitel);
+                        */
                         break;
 
                     case "x":
