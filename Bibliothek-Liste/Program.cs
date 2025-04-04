@@ -123,6 +123,7 @@ namespace Bibliothek_Liste
                         {
                             case "y":
                                 buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
+                                buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
                                 Console.WriteLine("");
                                 Console.WriteLine("Das Buch wurde erfolgreich hinzugefügt");
                                 break;
