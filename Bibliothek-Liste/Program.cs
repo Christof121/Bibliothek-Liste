@@ -83,7 +83,7 @@ namespace Bibliothek_Liste
                 Auswahl = Auswahl.ToLower();
                 switch (Auswahl)
                 {
-                    
+
                     case "1": //Buecher ansehen
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
@@ -132,6 +132,7 @@ namespace Bibliothek_Liste
                                 Console.WriteLine("Es wurde kein Buch hinzugefügt");
                                 break;
                             default:
+                                Console.WriteLine("Eingabe fehlerhaft");
                                 break;
                         }
                         break;
