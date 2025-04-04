@@ -16,6 +16,11 @@ namespace Bibliothek_Liste
     {
         static void Main(string[] args)
         {
+
+            string uiBookAddTitel = "";
+            string uiBookAddAuthor = "";
+            string uiConfirmBookAdd = "";
+
             Console.Title = "Bibliothek";
 
             List<Buch> buecher_inventar = new List<Buch>() {
