@@ -16,6 +16,7 @@ namespace Bibliothek_Liste
     {
         static void Main(string[] args)
         {
+            bool menue = true;
 
             string uiBookAddTitel = "";
             string uiBookAddAuthor = "";
@@ -83,7 +84,7 @@ namespace Bibliothek_Liste
                 Auswahl = Auswahl.ToLower();
                 switch (Auswahl)
                 {
-                    
+
                     case "1": //Buecher ansehen
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
@@ -123,6 +124,7 @@ namespace Bibliothek_Liste
                         {
                             case "y":
                                 buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
+                                buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
                                 Console.WriteLine("");
                                 Console.WriteLine("Das Buch wurde erfolgreich hinzugefügt");
                                 break;
@@ -132,6 +134,7 @@ namespace Bibliothek_Liste
                                 Console.WriteLine("Es wurde kein Buch hinzugefügt");
                                 break;
                             default:
+                                Console.WriteLine("Eingabe fehlerhaft");
                                 break;
                         }
                         break;
@@ -238,6 +241,9 @@ namespace Bibliothek_Liste
                         break;
 
                     case "x":
+                        Console.WriteLine("");
+                        Console.WriteLine("Das Programm wurde beendet");
+                        menue = false;
                         break;
 
                     default:
@@ -250,7 +256,7 @@ namespace Bibliothek_Liste
                 Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
                 Console.ReadKey();
                 Console.Clear();
-            } while (true);
+            } while (menue);
         }
     }
 }
