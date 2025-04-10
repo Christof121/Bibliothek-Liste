@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Bibliothek_Methoden
 {
     class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
-               //public bedeutet dass man von überall im Programm darauf zugreifen kann
+        //public bedeutet dass man von überall im Programm darauf zugreifen kann
     {   // Eigenschaften 'Titel' , 'Autor' und 'Anzahl' werden erstellt. 
         // 'get; set;' erstellt die Getter- und Setter-Methoden, 
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
@@ -213,6 +213,7 @@ namespace Bibliothek_Methoden
             Console.Title = "Bibliothek";
             // Erstellt eine neue Liste von Buch-Objekten namens 'buecher_inventar'.
             // In der List<Buch> können 'Buch'-Objekte gespeichert werden.
+            // Mit zb out int abc können auch mehrere werte zurückgegeben werden
             List<Buch> buecher_inventar = new List<Buch>() {
                 new Buch() { Titel = "Vom Winde verweht", Autor = "Hans Mueller", Anzahl = 2 },
                 new Buch() { Titel = "Vom Sturm verweht", Autor = "Hans Mueller", Anzahl = 1 },
