@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bibliothek_Liste
 {
-    class Buch
-    {
+    class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
+    {   // Eigenschaften 'Titel' und 'Author' werden erstellt. 
+        // 'get; set;' erstellt die Getter- und Setter-Methoden, 
+        // um den Wert der Eigenschaft zu lesen und zu schreiben.
         public string Titel { get; set; }
         public string Author { get; set; }
         public string Anzahl { get; set; }
@@ -20,15 +22,9 @@ namespace Bibliothek_Liste
         {
             bool menue = true;
 
-            string uiBookAddTitel = "";
-            string uiBookAddAuthor = "";
-            string uiConfirmBookAdd = "";
-
-            string uiBookRemoveTitel = "";
-            string uiConfirmBookRemove = "";
-
             Console.Title = "Bibliothek";
-
+            // Erstellt eine neue Liste von Buch-Objekten namens 'buecher_inventar'.
+            // In der List<Buch> können 'Buch'-Objekte gespeichert werden.
             List<Buch> buecher_inventar = new List<Buch>() {
             new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller"},
             new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller"},
@@ -53,7 +49,9 @@ namespace Bibliothek_Liste
             new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
             new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
             };
-            // Bücher sortieren
+
+            // Sortiert die Liste 'buecher_inventar' alphabetisch nach dem Titel.
+            // ToList() wandelt das sortierte Ergebnis zurück in eine List<Buch>.
             buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
 
             //Console.WriteLine(buecher[1].Author);
@@ -66,7 +64,9 @@ namespace Bibliothek_Liste
                 Console.WriteLine(item.Titel);
             }
             */
+
             List<Buch> buecher_ausgeliehen = new List<Buch>();
+            // Erstellt eine leere Liste für die ausgeliehenen Bücher.
 
             do
             {
@@ -92,10 +92,13 @@ namespace Bibliothek_Liste
                 Auswahl = Auswahl.ToLower();
                 switch (Auswahl)
                 {
+                    // Fall 1: Bücher im Inventar ansehen
+                    case "1":
 
-                    case "1": //Buecher ansehen
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
+                        // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
+                        // {1,-9}  bedeutet: Platzhalter 1, linksbündig (-), auf 9 Zeichen Breite.
                         Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
                         Console.WriteLine("____________________________________________________________________");
                         foreach (var buch in buecher_inventar)
@@ -106,9 +109,10 @@ namespace Bibliothek_Liste
                         Console.ReadKey();
                         break;
 
+                    // Fall 2: Neues Buch hinzufügen
                     case "2":
-                        Console.Clear();
 
+                        Console.Clear();
                         Console.WriteLine($"Buch hinzufügen");
                         Console.WriteLine($"==================================================");
                         Console.WriteLine("");
@@ -116,10 +120,10 @@ namespace Bibliothek_Liste
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Buchtitel an: ");
-                        uiBookAddTitel = Console.ReadLine();
+                       string uiBookAddTitel = Console.ReadLine();
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Author an: ");
-                        uiBookAddAuthor = Console.ReadLine();
+                         string uiBookAddAuthor = Console.ReadLine();
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.WriteLine($"Folgendes Buch wird hinzugefügt");
@@ -130,39 +134,46 @@ namespace Bibliothek_Liste
 
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
-                        uiConfirmBookAdd = Console.ReadLine();
+                        string uiConfirmBookAdd = Console.ReadLine();
                         switch (uiConfirmBookAdd)
                         {
                             case "y":
+                                // Erstellt ein neues Buch-Objekt mit den eingegebenen Daten und fügt es zur Inventarliste hinzu.
                                 buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
+                                // Sortiert die Liste erneut, damit das neue Buch an der richtigen Stelle steht.
                                 buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
                                 Console.WriteLine("");
                                 Console.WriteLine("Das Buch wurde erfolgreich hinzugefügt");
                                 break;
-                            case "n":
+                            case "n": //Buch Eingabe abbrechen
                                 uiBookAddAuthor = "";
                                 uiBookAddTitel = "";
                                 Console.WriteLine("Es wurde kein Buch hinzugefügt");
                                 break;
-                            default:
+                            default: //Fehlerhafte Eingabe
                                 Console.WriteLine("Eingabe fehlerhaft");
                                 break;
                         }
                         break;
 
+                    // Fall 3: Buch ausleihen
                     case "3":
+
+                        // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
                         bool buchgefunden = false;
                         Console.Clear();
                         Console.Write("Suche nach einem Buch: ");
                         string suche = Console.ReadLine().ToLower();
+                        // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(suche))
                         {
                             for (int i = 0; i < buecher_inventar.Count; i++)
                             {
+                                //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
                                 if (buecher_inventar[i].Titel.ToLower().Contains(suche))
                                 {
                                     buchgefunden = true;
-
+                                    //gefundenes Buch wird angezeigt.
                                     Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
                                     Console.WriteLine("____________________________________________________________________");
                                     Console.WriteLine("{0,-40} | {1,-9}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
@@ -171,11 +182,18 @@ namespace Bibliothek_Liste
 
                                     if (auswahlverschieben=="y")
                                     {
+                                        // Fügt das Buch zur Liste der ausgeliehenen Bücher hinzu.
                                         buecher_ausgeliehen.Add(buecher_inventar[i]);
+                                        // Entfernt das Buch aus der Inventarliste.
                                         buecher_inventar.RemoveAt(i);
+                                        // verringert den Index um 1, da das Buch entfernt wurde.
+                                        --i;
                                         Console.WriteLine("Buch wurde ausgeliehen");
                                     }
-                                    else
+                                    else //wenn das Buch nicht ausgeliehen werden soll
+                                    {
+                                        Console.WriteLine("Buch nicht ausgeliehen");
+                                    }
                                     {
                                         Console.WriteLine("Buch nicht ausgeliehen");
                                     }
@@ -183,16 +201,24 @@ namespace Bibliothek_Liste
                                     Console.ReadKey();
                                 }
                             }
-                            if (!buchgefunden)
+                            if (!buchgefunden) // Wenn kein passendes Buch gefunden wurde
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
                             }
                         }
+                        else // Falls der Benutzer nichts eingegeben hat.
+                        {
+                            Console.WriteLine("\nLeere Sucheingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
                         break;
 
+                    // Fall 4: Buch zurückgeben
                     case "4":
+
                         buchgefunden = false;
                         Console.Clear();
                         Console.Write("Suche nach einem Buch: ");
@@ -209,18 +235,19 @@ namespace Bibliothek_Liste
                                     Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
                                     Console.WriteLine("____________________________________________________________________");
                                     Console.WriteLine("{0,-40} | {1,-9}", buecher_ausgeliehen[i].Titel, buecher_ausgeliehen[i].Author);
-                                    Console.WriteLine("\nWollen sie dieses Buch ausleihen y/n:");
+                                    Console.WriteLine("\nWollen sie dieses Buch zurückgeben y/n:");
                                     string auswahlverschieben = Console.ReadLine();
 
                                     if (auswahlverschieben == "y")
                                     {
                                         buecher_inventar.Add(buecher_ausgeliehen[i]);
                                         buecher_ausgeliehen.RemoveAt(i);
-                                        Console.WriteLine("Buch wurde ausgeliehen");
+                                        --i;
+                                        Console.WriteLine("Buch wurde zurückgegeben");
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Buch nicht ausgeliehen");
+                                        Console.WriteLine("Buch nicht zurückgegeben");
                                     }
                                     Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                     Console.ReadKey();
@@ -233,9 +260,17 @@ namespace Bibliothek_Liste
                                 Console.ReadKey();
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("\nLeere Sucheingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
                         break;
 
+                    // Fall 5: Ausgeliehene Bücher anzeigen
                     case "5":
+
                         Console.Clear();
                         Console.WriteLine("\nAusgeliehene Buecher:");
                         Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
@@ -248,7 +283,11 @@ namespace Bibliothek_Liste
                         Console.ReadKey();
                         break;
 
+                    // Fall 6: Buch dauerhaft aus dem Inventar entfernen
                     case "6":
+
+                        string uiBookRemoveTitel = "";
+                        Console.Clear();
                         Console.WriteLine($"Buch Löschen");
                         Console.WriteLine($"==================================================");
                         Console.WriteLine("");
@@ -273,8 +312,10 @@ namespace Bibliothek_Liste
 
                                     if (auswahlloeschen == "y")
                                     {
+                                        // Buch an der aktuellen Position 'i' aus dem Inventar entfernen.
                                         buecher_inventar.RemoveAt(i);
                                         Console.WriteLine("Buch wurde gelöscht");
+                                        --i;
                                     }
                                     else
                                     {
@@ -284,12 +325,19 @@ namespace Bibliothek_Liste
                                     Console.ReadKey();
                                 }
                             }
+
                             if (!buchgefunden)
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
                             }
+                        }
+                        else // Falls der Benutzer nichts eingegeben hat.
+                        {
+                            Console.WriteLine("\nLeere Sucheingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
                         }
                         /*
                         uiBookRemoveTitel = Console.ReadLine();
@@ -325,7 +373,9 @@ namespace Bibliothek_Liste
                         */
                         break;
 
+                    // Fall x: Programm beenden
                     case "x":
+
                         Console.WriteLine("");
                         Console.WriteLine("Das Programm wurde beendet");
                         menue = false;
