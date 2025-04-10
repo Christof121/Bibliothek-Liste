@@ -164,12 +164,23 @@ namespace Bibliothek_Liste
                         Console.Write($"Geben Sie den Author an: ");
                         string uiBookAddAuthor = Console.ReadLine();
                         Console.WriteLine("");
+                        int uiBookAddAnzahl = 0;
+                        do {
+                            Console.Write($"Geben Sie den Anzahl der Bücher an: ");
+                            //string uiBookAddAnzahl = Console.ReadLine();
+                            if (int.TryParse(Console.ReadLine(), out uiBookAddAnzahl) && uiBookAddAnzahl > 0)
+                            {
+                                break;
+                            }
+                            Console.WriteLine("Eingabe fehlerhaft, bitte Wiederholen.");
+                        } while (true);
+                        Console.WriteLine("");
                         Console.WriteLine("");
                         Console.WriteLine($"Folgendes Buch wird hinzugefügt");
 
-                        Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
-                        Console.WriteLine("____________________________________________________________________");
-                        Console.WriteLine("{0,-40} | {1,-26}", uiBookAddTitel, uiBookAddAuthor);
+                        Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                        Console.WriteLine("______________________________________________________________________________");
+                        Console.WriteLine($"{uiBookAddTitel,-40} | {uiBookAddAuthor,-26} | {uiBookAddAnzahl,-6}");
 
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
@@ -178,7 +189,7 @@ namespace Bibliothek_Liste
                         {
                             case "y":
                                 // Erstellt ein neues Buch-Objekt mit den eingegebenen Daten und fügt es zur Inventarliste hinzu.
-                                buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
+                                buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor, Anzahl = uiBookAddAnzahl });
                                 // Sortiert die Liste erneut, damit das neue Buch an der richtigen Stelle steht.
                                 // OrderBy gibt eine Sortierte Sequenz der Klasse Buch nach der Eigenschaft Titel zurück.
                                 // .ToList() wandelt das Ergebnis in eine Liste um.
