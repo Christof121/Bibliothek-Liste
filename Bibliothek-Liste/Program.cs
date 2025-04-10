@@ -12,7 +12,7 @@ namespace Bibliothek_Liste
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
         public string Titel { get; set; }
         public string Author { get; set; }
-        public string Anzahl { get; set; }
+        public int Anzahl { get; set; }
 
     }
 
