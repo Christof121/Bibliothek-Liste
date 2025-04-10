@@ -72,10 +72,10 @@ namespace Bibliothek_Liste
             {
                 #region Menue
 
-                Console.WriteLine($"Bibliotheke");
+                Console.WriteLine($"Bibliothek");
                 Console.WriteLine($"==================================================");
                 Console.WriteLine($"1) Bücher ansehen");
-                Console.WriteLine($"2) Bücher anfuegen");
+                Console.WriteLine($"2) Bücher hinzufuegen");
                 Console.WriteLine($"3) Bücher ausleihen");
                 Console.WriteLine($"4) Bücher zurueckgeben");
                 Console.WriteLine($"5) Ausgeliehene Buecher ausgeben");
