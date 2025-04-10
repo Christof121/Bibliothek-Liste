@@ -10,6 +10,8 @@ namespace Bibliothek_Liste
     {
         public string Titel { get; set; }
         public string Author { get; set; }
+        public string Anzahl { get; set; }
+
     }
 
     internal class Program
