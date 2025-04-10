@@ -105,8 +105,6 @@ namespace Bibliothek_Liste
                         {
                             Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
                         }
-                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                        Console.ReadKey();
                         break;
 
                     // Fall 2: Neues Buch hinzufügen
@@ -197,22 +195,16 @@ namespace Bibliothek_Liste
                                     {
                                         Console.WriteLine("Buch nicht ausgeliehen");
                                     }
-                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                    Console.ReadKey();
                                 }
                             }
                             if (!buchgefunden) // Wenn kein passendes Buch gefunden wurde
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
                             }
                         }
                         else // Falls der Benutzer nichts eingegeben hat.
                         {
                             Console.WriteLine("\nLeere Sucheingabe.");
-                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                            Console.ReadKey();
                         }
                         break;
 
@@ -249,22 +241,16 @@ namespace Bibliothek_Liste
                                     {
                                         Console.WriteLine("Buch nicht zurückgegeben");
                                     }
-                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                    Console.ReadKey();
                                 }
                             }
                             if (!buchgefunden)
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
                             }
                         }
                         else
                         {
                             Console.WriteLine("\nLeere Sucheingabe.");
-                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                            Console.ReadKey();
                         }
                         break;
 
@@ -279,8 +265,6 @@ namespace Bibliothek_Liste
                         {
                             Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
                         }
-                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                        Console.ReadKey();
                         break;
 
                     // Fall 6: Buch dauerhaft aus dem Inventar entfernen
@@ -321,23 +305,17 @@ namespace Bibliothek_Liste
                                     {
                                         Console.WriteLine("Buch nicht gelöscht");
                                     }
-                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                    Console.ReadKey();
                                 }
                             }
 
                             if (!buchgefunden)
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
                             }
                         }
                         else // Falls der Benutzer nichts eingegeben hat.
                         {
                             Console.WriteLine("\nLeere Sucheingabe.");
-                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                            Console.ReadKey();
                         }
                         /*
                         uiBookRemoveTitel = Console.ReadLine();
