@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Bibliothek_Methoden
 {
     class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
-        //public bedeutet dass man von überall im Programm darauf zugreifen kann
+               //public bedeutet dass man von überall im Programm darauf zugreifen kann
     {   // Eigenschaften 'Titel' , 'Autor' und 'Anzahl' werden erstellt. 
         // 'get; set;' erstellt die Getter- und Setter-Methoden, 
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
@@ -188,6 +188,24 @@ namespace Bibliothek_Methoden
                 else Console.WriteLine("Fehlerhafte Eingabe");
             }
         }
+
+
+        // Diese Methode sucht in der Liste 'buecher_inventar' nach Büchern, deren Titel den Suchbegriff enthält.
+        //Parameter buecher_inventar: Die Liste der Bücher, in der gesucht werden soll. Und suche ist der Suchbegriff.
+        static List<Buch> BuecherSuche(List<Buch> buecher_inventar, string suche)
+        {
+            List<Buch> buecher_ergebnis = new List<Buch>();
+            for (int i = 0; i < buecher_inventar.Count; i++)
+            {
+                //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
+                if (buecher_inventar[i].Titel.ToLower().Contains(suche))
+                {
+                    buecher_ergebnis.Add(buecher_inventar[i]);
+                }
+            }
+            return buecher_ergebnis;
+        }
+
         static void Main(string[] args)
         {
             bool menue = true;
@@ -234,7 +252,7 @@ namespace Bibliothek_Methoden
                 Console.WriteLine(item.Titel);
             }
             */
-
+            List<Buch> suchergebnissliste = new List<Buch>();
             List<Buch> buecher_ausgeliehen = new List<Buch>();
             // Erstellt eine leere Liste für die ausgeliehenen Bücher.
 
@@ -364,56 +382,40 @@ namespace Bibliothek_Methoden
                     // Fall 3: Buch ausleihen
                     case "3":
 
-                        // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
-                        bool buchgefunden = false;
                         Console.Clear();
                         Console.Write("Suche nach einem Buch zum ausleihen: ");
                         string suche = Console.ReadLine().ToLower();
-                        do
+
+                        // Prüft, ob ein Suchbegriff eingegeben wurde.
+                        if (!string.IsNullOrEmpty(suche))
                         {
-                            // Prüft, ob ein Suchbegriff eingegeben wurde.
-                            if (!string.IsNullOrEmpty(suche))
-                            {
-                                List<Buch> ausleihen = new List<Buch>();
-                                for (int i = 0; i < buecher_inventar.Count; i++)
-                                {
 
-                                    //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
-                                    if (buecher_inventar[i].Titel.ToLower().Contains(suche))
-                                    {
+                            suchergebnissliste = BuecherSuche(buecher_inventar, suche);
 
-                                        buchgefunden = true;
-                                        int j = 0;
-                                        ausleihen.Add(buecher_inventar[i]);
-                                        j++;
-                                    }
-                                }
+                            // ...rufe die Bearbeitungsmethode auf.
+                            // Übergebe:
+                            // - die Suchergebnisliste ('ausleihen') zur Auswahl
+                            // - die Inventarliste (für Bestandsänderungen)
+                            // - die Ausleihliste (zum Hinzufügen)
+                            // - die Operationsnummer (1 für Ausleihen)
+                            Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 1);
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
+                        else if (string.IsNullOrEmpty(suche)) // Wenn die eingabe fehlerhaft ist
+                        {
+                            Console.WriteLine("\nFehlerhafte Eingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
+                        else if (suchergebnissliste.Count == 0) // Wenn kein passendes Buch gefunden wurde
+                        {
+                            Console.WriteLine("\nBuch nicht gefunden.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
 
-                                // ...rufe die Bearbeitungsmethode auf.
-                                // Übergebe:
-                                // - die Suchergebnisliste ('ausleihen') zur Auswahl
-                                // - die Inventarliste (für Bestandsänderungen)
-                                // - die Ausleihliste (zum Hinzufügen)
-                                // - die Operationsnummer (1 für Ausleihen)
-                                Buchbearbeitung(ausleihen, buecher_inventar, buecher_ausgeliehen, 1);
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
-                            else if (!buchgefunden) // Wenn kein passendes Buch gefunden wurde
-                            {
-                                Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
 
-                            else // Falls der Benutzer nichts eingegeben hat.
-                            {
-                                Console.WriteLine("\nLeere Sucheingabe.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-
-                            }
-                        } while (false);
+                        }
 
                         break;
 
@@ -494,53 +496,45 @@ namespace Bibliothek_Methoden
                      }
                      break;
                     */
-                    // Fall 4: Buch zurückgeben
 
+                    // Fall 4: Buch zurückgeben
                     case "4":
 
-                        // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
-                        buchgefunden = false;
+
                         Console.Clear();
                         Console.Write("Suche nach einem Buch zum zurückgeben: ");
                         suche = Console.ReadLine().ToLower();
-                        do
+
+                        // Prüft, ob ein Suchbegriff eingegeben wurde.
+                        if (!string.IsNullOrEmpty(suche))
                         {
-                            // Prüft, ob ein Suchbegriff eingegeben wurde.
-                            if (!string.IsNullOrEmpty(suche))
-                            {
-                                List<Buch> zurückgeben = new List<Buch>();
-                                for (int i = 0; i < buecher_ausgeliehen.Count; i++)
-                                {
 
-                                    //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
-                                    if (buecher_ausgeliehen[i].Titel.ToLower().Contains(suche))
-                                    {
+                            suchergebnissliste = BuecherSuche(buecher_inventar, suche);
 
-                                        buchgefunden = true;
-                                        int j = 0;
-                                        zurückgeben.Add(buecher_ausgeliehen[i]);
-                                        j++;
-                                    }
-                                }
-                                Buchbearbeitung(zurückgeben, buecher_inventar, buecher_ausgeliehen, 2);
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
-                            else if (!buchgefunden) // Wenn kein passendes Buch gefunden wurde
-                            {
-                                Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
+                            // ...rufe die Bearbeitungsmethode auf.
+                            // Übergebe:
+                            // - die Suchergebnisliste ('ausleihen') zur Auswahl
+                            // - die Inventarliste (für Bestandsänderungen)
+                            // - die Ausleihliste (zum Hinzufügen)
+                            // - die Operationsnummer (1 für Ausleihen)
+                            Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
+                        else if (string.IsNullOrEmpty(suche)) // Wenn die eingabe fehlerhaft ist
+                        {
+                            Console.WriteLine("\nFehlerhafte Eingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+                        }
+                        else if (suchergebnissliste.Count == 0) // Wenn kein passendes Buch gefunden wurde
+                        {
+                            Console.WriteLine("\nBuch nicht gefunden.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
 
-                            else // Falls der Benutzer nichts eingegeben hat.
-                            {
-                                Console.WriteLine("\nLeere Sucheingabe.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
 
-                            }
-                        } while (false);
+                        }
 
                         /*   //alt Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
                            buchgefunden = false;
@@ -715,150 +709,147 @@ namespace Bibliothek_Methoden
                         Console.WriteLine("");
                         Console.Write("Eingabe: ");
                         uiBookRemoveTitel = Console.ReadLine().ToLower();
-                        buchgefunden = false;
-                        do
-                        {
-                            if (!string.IsNullOrEmpty(uiBookRemoveTitel))
-                            {
-                                List<Buch> loeschen = new List<Buch>();
-                                for (int i = 0; i < buecher_inventar.Count; i++)
-                                {
-                                    if (buecher_inventar[i].Titel.ToLower().Contains(uiBookRemoveTitel))
-                                    {
-                                        buchgefunden = true;
-                                        int j = 0;
-                                        loeschen.Add(buecher_inventar[i]);
-                                        j++;
-                                    }
 
-                                }
-                                Buchbearbeitung(loeschen, buecher_inventar, buecher_ausgeliehen, 3);
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-
-                                if (!buchgefunden)
-                                {
-                                    Console.WriteLine("\nBuch nicht gefunden.");
-                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                    Console.ReadKey();
-                                }
-                            }
-                            else // Falls der Benutzer nichts eingegeben hat.
-                            {
-                                Console.WriteLine("\nLeere Sucheingabe.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
-                        } while (false);
-                        /*//alt
-                        string uiBookRemoveTitel = "";
-                        Console.Clear();
-                        Console.WriteLine($"Buch Löschen");
-                        Console.WriteLine($"==================================================");
-                        Console.WriteLine("");
-                        Console.WriteLine("Welchen Buchtitel möchten Sie löschen?");
-                        Console.WriteLine("");
-                        Console.Write("Eingabe: ");
-                        uiBookRemoveTitel = Console.ReadLine().ToLower();
-                        buchgefunden = false;
+                        // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(uiBookRemoveTitel))
                         {
-                            for (int i = 0; i < buecher_inventar.Count; i++)
-                            {
-                                if (buecher_inventar[i].Titel.ToLower().Contains(uiBookRemoveTitel))
-                                {
-                                    buchgefunden = true;
 
-                                    Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
-                                    Console.WriteLine("____________________________________________________________________");
-                                    Console.WriteLine("{0,-40} | {1,-26}", buecher_inventar[i].Titel, buecher_inventar[i].Autor);
-                                    Console.WriteLine("\nWollen sie dieses Buch löschen? y/n:");
-                                    string auswahlloeschen = Console.ReadLine();
+                            suchergebnissliste = BuecherSuche(buecher_inventar, uiBookRemoveTitel);
 
-                                    if (auswahlloeschen == "y")
-                                    {
-                                        // Buch an der aktuellen Position 'i' aus dem Inventar entfernen.
-                                        buecher_inventar.RemoveAt(i);
-                                        Console.WriteLine("Buch wurde gelöscht");
-                                        --i;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Buch nicht gelöscht");
-                                    }
-                                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                    Console.ReadKey();
-                                }
-                            }
-
-                            if (!buchgefunden)
-                            {
-                                Console.WriteLine("\nBuch nicht gefunden.");
-                                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                                Console.ReadKey();
-                            }
-                        }
-                        else // Falls der Benutzer nichts eingegeben hat.
-                        {
-                            Console.WriteLine("\nLeere Sucheingabe.");
+                            // ...rufe die Bearbeitungsmethode auf.
+                            // Übergebe:
+                            // - die Suchergebnisliste ('ausleihen') zur Auswahl
+                            // - die Inventarliste (für Bestandsänderungen)
+                            // - die Ausleihliste (zum Hinzufügen)
+                            // - die Operationsnummer (1 für Ausleihen)
+                            Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 3);
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                             Console.ReadKey();
                         }
-                        /*
-                        uiBookRemoveTitel = Console.ReadLine();
-                        int index = buecher_inventar.FindIndex(e => e.Titel == uiBookRemoveTitel);
-                        Console.WriteLine("");
-                        if (index == -1) {
-                            Console.WriteLine("Es wurde kein Buch mit dem Titel gefunden");
-                            break;
-                        }
-                        Console.WriteLine("");
-                        Console.WriteLine("Folgendes Buch wurde gefunden");
-                        Console.WriteLine($"{buecher_inventar[index].Titel}");
-                        Console.WriteLine($"{buecher_inventar[index].Autor}");
-                        Console.WriteLine("");
-                        Console.Write("Soll das Buch gelöscht werden? [y/n]");
-                        uiConfirmBookRemove = Console.ReadLine();
-                        switch (uiConfirmBookRemove)
+                        else if (string.IsNullOrEmpty(uiBookRemoveTitel)) // Wenn die eingabe fehlerhaft ist
                         {
-                            case "y":
-                                buecher_inventar.RemoveAt(index);
-                                Console.WriteLine("");
-                                Console.WriteLine("Das Buch wurde erfolgreich gelöscht");
-                                break;
-                            case "n":
-                                uiBookRemoveTitel = "";
-                                Console.WriteLine("Es wurde kein Buch gelöscht");
-                                break;
-                            default:
-                                Console.WriteLine("Eingabe fehlerhaft");
-                                break;
+                            Console.WriteLine("\nFehlerhafte Eingabe.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
                         }
-                        //buecher_inventar.Remove(uiBookRemoveTitel);
-                        */
-                        break;
+                        else if (suchergebnissliste.Count == 0) // Wenn kein passendes Buch gefunden wurde
+                        {
+                            Console.WriteLine("\nBuch nicht gefunden.");
+                            Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                            Console.ReadKey();
+
+
+                        }
+
+            /*//alt
+            string uiBookRemoveTitel = "";
+            Console.Clear();
+            Console.WriteLine($"Buch Löschen");
+            Console.WriteLine($"==================================================");
+            Console.WriteLine("");
+            Console.WriteLine("Welchen Buchtitel möchten Sie löschen?");
+            Console.WriteLine("");
+            Console.Write("Eingabe: ");
+            uiBookRemoveTitel = Console.ReadLine().ToLower();
+            buchgefunden = false;
+            if (!string.IsNullOrEmpty(uiBookRemoveTitel))
+            {
+                for (int i = 0; i < buecher_inventar.Count; i++)
+                {
+                    if (buecher_inventar[i].Titel.ToLower().Contains(uiBookRemoveTitel))
+                    {
+                        buchgefunden = true;
+
+                        Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
+                        Console.WriteLine("____________________________________________________________________");
+                        Console.WriteLine("{0,-40} | {1,-26}", buecher_inventar[i].Titel, buecher_inventar[i].Autor);
+                        Console.WriteLine("\nWollen sie dieses Buch löschen? y/n:");
+                        string auswahlloeschen = Console.ReadLine();
+
+                        if (auswahlloeschen == "y")
+                        {
+                            // Buch an der aktuellen Position 'i' aus dem Inventar entfernen.
+                            buecher_inventar.RemoveAt(i);
+                            Console.WriteLine("Buch wurde gelöscht");
+                            --i;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Buch nicht gelöscht");
+                        }
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
+                    }
+                }
+
+                if (!buchgefunden)
+                {
+                    Console.WriteLine("\nBuch nicht gefunden.");
+                    Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                    Console.ReadKey();
+                }
+            }
+            else // Falls der Benutzer nichts eingegeben hat.
+            {
+                Console.WriteLine("\nLeere Sucheingabe.");
+                Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                Console.ReadKey();
+            }
+            /*
+            uiBookRemoveTitel = Console.ReadLine();
+            int index = buecher_inventar.FindIndex(e => e.Titel == uiBookRemoveTitel);
+            Console.WriteLine("");
+            if (index == -1) {
+                Console.WriteLine("Es wurde kein Buch mit dem Titel gefunden");
+                break;
+            }
+            Console.WriteLine("");
+            Console.WriteLine("Folgendes Buch wurde gefunden");
+            Console.WriteLine($"{buecher_inventar[index].Titel}");
+            Console.WriteLine($"{buecher_inventar[index].Autor}");
+            Console.WriteLine("");
+            Console.Write("Soll das Buch gelöscht werden? [y/n]");
+            uiConfirmBookRemove = Console.ReadLine();
+            switch (uiConfirmBookRemove)
+            {
+                case "y":
+                    buecher_inventar.RemoveAt(index);
+                    Console.WriteLine("");
+                    Console.WriteLine("Das Buch wurde erfolgreich gelöscht");
+                    break;
+                case "n":
+                    uiBookRemoveTitel = "";
+                    Console.WriteLine("Es wurde kein Buch gelöscht");
+                    break;
+                default:
+                    Console.WriteLine("Eingabe fehlerhaft");
+                    break;
+            }
+            //buecher_inventar.Remove(uiBookRemoveTitel);
+            */
+            break;
 
                     // Fall x: Programm beenden
                     case "x":
 
-                        Console.WriteLine("");
-                        Console.WriteLine("Das Programm wurde beendet");
-                        menue = false;
-                        break;
+                Console.WriteLine("");
+                Console.WriteLine("Das Programm wurde beendet");
+                menue = false;
+                break;
 
-                    default:
-                        Console.WriteLine($"");
-                        Console.WriteLine("Eingabe Fehlerhaft");
-                        Console.WriteLine("Bitte wiederholen Sie ihre Eingabe.");
-                        break;
-                }
+            default:
+                Console.WriteLine($"");
+                Console.WriteLine("Eingabe Fehlerhaft");
+                Console.WriteLine("Bitte wiederholen Sie ihre Eingabe.");
+                break;
+            }
                 ;
-                Console.WriteLine();
-                Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
-                Console.ReadKey();
-                Console.Clear();
-            } while (menue);
+            Console.WriteLine();
+            Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
+            Console.ReadKey();
+            Console.Clear();
+        } while (menue);
         }
-    }
+}
 }
 
