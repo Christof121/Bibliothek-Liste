@@ -94,7 +94,45 @@ namespace Bibliothek_Liste
                 {
                     // Fall 1: Bücher im Inventar ansehen
                     case "1":
+                        Console.Clear();
+                        Console.Write("Wie möchten Sie die Liste sortieren? ([T]itel / [A]utor): ");
+                        string sortWahl = Console.ReadLine();
+                        string sortWahlstandard = "t"; // Standardmäßig nach Titel sortieren
+                        buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
 
+                        if (!string.IsNullOrEmpty(sortWahl))
+                        {
+                            sortWahlstandard = sortWahl.ToLower();
+                        }
+
+                        if (sortWahlstandard == "t" || sortWahlstandard == "titel")
+                        {
+                            // Sortiere die Liste nach Titel
+                            buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
+                            Console.WriteLine("\nBücher Inventar (sortiert nach Titel):");
+                        }
+
+                        else if (sortWahlstandard == "a" || sortWahlstandard == "autor")
+                        {
+                            // Sortiere die Liste nach Autor
+                            buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Author).ToList();
+                            Console.WriteLine("\nBücher Inventar (sortiert nach Author):");
+                        }
+
+                        Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                        Console.WriteLine("______________________________________________________________________________");
+                        foreach (var buch in buecher_inventar)
+                        {
+                            Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buch.Titel, buch.Author, buch.Anzahl);
+                        }
+
+                        // Sortiere die Liste zurück nach Titel    
+                        if (sortWahlstandard == "a" || sortWahlstandard == "autor") buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
+
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
+                        /*
+                        Ohne sortierungswahl
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
                         // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
@@ -107,6 +145,7 @@ namespace Bibliothek_Liste
                         }
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
+                        */
                         break;
 
                     // Fall 2: Neues Buch hinzufügen
@@ -312,7 +351,9 @@ namespace Bibliothek_Liste
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                             Console.ReadKey();
                         }
-                        /* buchgefunden = false;
+                        /* 
+                         Code noch ohne Anzahl
+                         buchgefunden = false;
                          Console.Clear();
                          Console.Write("Suche nach einem Buch: ");
                          suche = "";
@@ -360,6 +401,7 @@ namespace Bibliothek_Liste
                              Console.ReadKey();
                          }
                         */
+
                         break;
 
                     // Fall 5: Ausgeliehene Bücher anzeigen
