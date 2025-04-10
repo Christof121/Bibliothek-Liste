@@ -30,7 +30,7 @@ namespace Bibliothek_Methoden
             }
 
         }
-        static void Buchbearbeitung(List<Buch> buecher_input, List<Buch> buecher_output, int operation)
+        static void Buchbearbeitung(List<Buch> buecher_input, List<Buch> buecher_inventar, List<Buch> buecher_ausgeliehen, int operation)
         {
             int i = 0;
             Console.WriteLine("\nGefundene Bücher:):");
@@ -50,20 +50,20 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
-                    for (int j = 0; j < buecher_output.Count; j++)
+                    for (int j = 0; j < buecher_inventar.Count; j++)
                     {
 
                         // Vergleicht das auszuleihende Buch mit den bereits ausgeliehenen Büchern
-                        if (buecher_output[j].Titel == buecher_input[indexInt].Titel && buecher_output[j].Autor == buecher_input[indexInt].Autor)
+                        if (buecher_ausgeliehen[j].Titel == buecher_input[indexInt].Titel && buecher_ausgeliehen[j].Autor == buecher_input[indexInt].Autor)
                         {
-                            buecher_output[j].Anzahl++; // Erhöhe Anzahl
+                            buecher_ausgeliehen[j].Anzahl++; // Erhöhe Anzahl
                             ausgeliehenGefunden = true;
                         }
                     }
                     // Wenn das Buch noch nicht vorhanden ist wird es hinzugefügt
                     if (!ausgeliehenGefunden)
                     {
-                        buecher_output.Add(new Buch() { Titel = buecher_input[indexInt].Titel, Autor = buecher_input[indexInt].Autor, Anzahl = 1 });
+                        buecher_ausgeliehen.Add(new Buch() { Titel = buecher_input[indexInt].Titel, Autor = buecher_input[indexInt].Autor, Anzahl = 1 });
                     }
 
                     // Verringert die Anzahl des Buches im Inventar um 1
@@ -86,25 +86,26 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
-                    for (int j = 0; j < buecher_output.Count; j++)
+                    Buch buchzurueckgabe = buecher_input[indexInt];
+                    for (int j = 0; j < buecher_inventar.Count; j++)
                     {
 
                         // Vergleicht das auszuleihende Buch mit den bereits ausgeliehenen Büchern
-                        if (buecher_output[j].Titel == buecher_input[indexInt].Titel && buecher_output[j].Autor == buecher_input[indexInt].Autor)
+                        if (buecher_inventar[j].Titel == buecher_input[indexInt].Titel && buecher_inventar[j].Autor == buecher_input[indexInt].Autor)
                         {
-                            buecher_output[j].Anzahl++; // Erhöhe Anzahl
+                            buecher_inventar[j].Anzahl++; // Erhöhe Anzahl
                             ausgeliehenGefunden = true;
                         }
                     }
                     // Wenn das Buch noch nicht vorhanden ist wird es hinzugefügt
                     if (!ausgeliehenGefunden)
                     {
-                        buecher_output.Add(new Buch() { Titel = buecher_input[indexInt].Titel, Autor = buecher_input[indexInt].Autor, Anzahl = 1 });
+                        buecher_inventar.Add(new Buch() { Titel = buecher_input[indexInt].Titel, Autor = buecher_input[indexInt].Autor, Anzahl = 1 });
                     }
 
                     // Verringert die Anzahl des Buches im Inventar um 1
-                    buecher_input[indexInt].Anzahl--;
-                    if (buecher_input[indexInt].Anzahl == 0) buecher_input.RemoveAt(indexInt); // Entferne aus der Liste
+                    buchzurueckgabe.Anzahl--;
+                    if (buchzurueckgabe.Anzahl == 0) buecher_ausgeliehen.Remove(buchzurueckgabe); // Entferne aus der Liste
 
 
 
@@ -137,7 +138,7 @@ namespace Bibliothek_Methoden
                         auswahlloeschen = Console.ReadLine().ToLower();
                         if (auswahlloeschen == "y")
                         {
-                            buecher_output.Remove(buchzuloeaschen);
+                            buecher_inventar.Remove(buchzuloeaschen);
                             Console.WriteLine("Buch wurde gelöscht");
                         }
                         else
@@ -153,7 +154,7 @@ namespace Bibliothek_Methoden
                                 if (eingabeInt > 0)
                                 {
                                     buecher_input[indexInt].Anzahl -= eingabeInt;
-                                    if (buecher_input[indexInt].Anzahl <= 0) buecher_output.Remove(buchzuloeaschen);  // Entferne aus der Liste
+                                    if (buecher_input[indexInt].Anzahl <= 0) buecher_inventar.Remove(buchzuloeaschen);  // Entferne aus der Liste
                                     Console.WriteLine("Buch wurde gelöscht");
                                 }
                                 else Console.WriteLine("Fehlerhafte Eingabe");
@@ -370,7 +371,7 @@ namespace Bibliothek_Methoden
                                         j++;
                                     }
                                 }
-                                Buchbearbeitung(ausleihen, buecher_ausgeliehen, 1);
+                                Buchbearbeitung(ausleihen, buecher_inventar, buecher_ausgeliehen, 1);
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
                             }
@@ -497,7 +498,7 @@ namespace Bibliothek_Methoden
                                         j++;
                                     }
                                 }
-                                Buchbearbeitung(zurückgeben, buecher_ausgeliehen, 2);
+                                Buchbearbeitung(zurückgeben, buecher_inventar, buecher_ausgeliehen, 2);
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
                             }
@@ -707,7 +708,7 @@ namespace Bibliothek_Methoden
                                     }
 
                                 }
-                                Buchbearbeitung(loeschen, buecher_inventar, 3);
+                                Buchbearbeitung(loeschen, buecher_inventar, buecher_ausgeliehen, 3);
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
 
