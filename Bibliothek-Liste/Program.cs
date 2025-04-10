@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Bibliothek_Liste
 {
     class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
-    {   // Eigenschaften 'Titel' und 'Author' werden erstellt. 
+    {   // Eigenschaften 'Titel' , 'Author' und 'Anzahl' werden erstellt. 
         // 'get; set;' erstellt die Getter- und Setter-Methoden, 
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
         public string Titel { get; set; }
@@ -26,28 +26,28 @@ namespace Bibliothek_Liste
             // Erstellt eine neue Liste von Buch-Objekten namens 'buecher_inventar'.
             // In der List<Buch> können 'Buch'-Objekte gespeichert werden.
             List<Buch> buecher_inventar = new List<Buch>() {
-            new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller"},
-            new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller"},
-            new Buch() { Titel = "Der Herr der Ringe", Author = "J.R.R. Tolkien" },
-            new Buch() { Titel = "Stolz und Vorurteil", Author = "Jane Austen" },
-            new Buch() { Titel = "1984", Author = "George Orwell" },
-            new Buch() { Titel = "Die Verwandlung", Author = "Franz Kafka" },
-            new Buch() { Titel = "Faust", Author = "Johann Wolfgang von Goethe" },
-            new Buch() { Titel = "Harry Potter und der Stein der Weisen", Author = "J.K. Rowling" },
-            new Buch() { Titel = "Der Schatten des Windes", Author = "Carlos Ruiz Zafón" },
-            new Buch() { Titel = "Der Alchimist", Author = "Paulo Coelho" },
-            new Buch() { Titel = "Das Parfum", Author = "Patrick Süskind" },
-            new Buch() { Titel = "Krieg und Frieden", Author = "Leo Tolstoi" },
-            new Buch() { Titel = "Der Fänger im Roggen", Author = "J.D. Salinger" },
-            new Buch() { Titel = "Die unendliche Geschichte", Author = "Michael Ende" },
-            new Buch() { Titel = "Moby Dick", Author = "Herman Melville" },
-            new Buch() { Titel = "Der kleine Prinz", Author = "Antoine de Saint-Exupéry" },
-            new Buch() { Titel = "Die Säulen der Erde", Author = "Ken Follett" },
-            new Buch() { Titel = "Sakrileg", Author = "Dan Brown" },
-            new Buch() { Titel = "Per Anhalter durch die Galaxis", Author = "Douglas Adams" },
-            new Buch() { Titel = "Der Medicus", Author = "Noah Gordon" },
-            new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee" },
-            new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco" }
+                new Buch() { Titel = "Vom Winde verweht", Author = "Hans Mueller", Anzahl = 2 },
+                new Buch() { Titel = "Vom Sturm verweht", Author = "Hans Mueller", Anzahl = 1 },
+                new Buch() { Titel = "Der Herr der Ringe", Author = "J.R.R. Tolkien", Anzahl = 3 },
+                new Buch() { Titel = "Stolz und Vorurteil", Author = "Jane Austen", Anzahl = 1 },
+                new Buch() { Titel = "1984", Author = "George Orwell", Anzahl = 4 },
+                new Buch() { Titel = "Die Verwandlung", Author = "Franz Kafka", Anzahl = 1 },
+                new Buch() { Titel = "Faust", Author = "Johann Wolfgang von Goethe", Anzahl = 2 },
+                new Buch() { Titel = "Harry Potter und der Stein der Weisen", Author = "J.K. Rowling", Anzahl = 5 },
+                new Buch() { Titel = "Der Schatten des Windes", Author = "Carlos Ruiz Zafón", Anzahl = 2 },
+                new Buch() { Titel = "Der Alchemist", Author = "Paulo Coelho", Anzahl = 1 },
+                new Buch() { Titel = "Das Parfum", Author = "Patrick Süskind", Anzahl = 3 },
+                new Buch() { Titel = "Krieg und Frieden", Author = "Leo Tolstoi", Anzahl = 1 },
+                new Buch() { Titel = "Der Fänger im Roggen", Author = "J.D. Salinger", Anzahl = 1 },
+                new Buch() { Titel = "Die unendliche Geschichte", Author = "Michael Ende", Anzahl = 4 },
+                new Buch() { Titel = "Moby Dick", Author = "Herman Melville", Anzahl = 1 },
+                new Buch() { Titel = "Der kleine Prinz", Author = "Antoine de Saint-Exupéry", Anzahl = 5 },
+                new Buch() { Titel = "Die Säulen der Erde", Author = "Ken Follett", Anzahl = 2 },
+                new Buch() { Titel = "Sakrileg", Author = "Dan Brown", Anzahl = 3 },
+                new Buch() { Titel = "Per Anhalter durch die Galaxis", Author = "Douglas Adams", Anzahl = 1 },
+                new Buch() { Titel = "Der Medicus", Author = "Noah Gordon", Anzahl = 2 },
+                new Buch() { Titel = "Wer die Nachtigall stört", Author = "Harper Lee", Anzahl = 1 },
+                new Buch() { Titel = "Der Name der Rose", Author = "Umberto Eco", Anzahl = 1 }
             };
 
             // Sortiert die Liste 'buecher_inventar' alphabetisch nach dem Titel.
@@ -78,7 +78,7 @@ namespace Bibliothek_Liste
                 Console.WriteLine($"2) Bücher anfuegen");
                 Console.WriteLine($"3) Bücher ausleihen");
                 Console.WriteLine($"4) Bücher zurueckgeben");
-                Console.WriteLine($"5) Ausgeliehende Buecher ausgeben");
+                Console.WriteLine($"5) Ausgeliehene Buecher ausgeben");
                 Console.WriteLine($"6) Buecher entfernen");
                 Console.WriteLine();
                 Console.WriteLine($"x) Ende");
@@ -99,11 +99,11 @@ namespace Bibliothek_Liste
                         Console.WriteLine("\nBuecher Inventar:");
                         // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
                         // {1,-9}  bedeutet: Platzhalter 1, linksbündig (-), auf 9 Zeichen Breite.
-                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
-                        Console.WriteLine("____________________________________________________________________");
+                        Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                        Console.WriteLine("______________________________________________________________________________");
                         foreach (var buch in buecher_inventar)
                         {
-                            Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
+                            Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buch.Titel, buch.Author, buch.Anzahl);
                         }
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
@@ -120,17 +120,17 @@ namespace Bibliothek_Liste
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Buchtitel an: ");
-                       string uiBookAddTitel = Console.ReadLine();
+                        string uiBookAddTitel = Console.ReadLine();
                         Console.WriteLine("");
                         Console.Write($"Geben Sie den Author an: ");
-                         string uiBookAddAuthor = Console.ReadLine();
+                        string uiBookAddAuthor = Console.ReadLine();
                         Console.WriteLine("");
                         Console.WriteLine("");
                         Console.WriteLine($"Folgendes Buch wird hinzugefügt");
 
-                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                        Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
                         Console.WriteLine("____________________________________________________________________");
-                        Console.WriteLine("{0,-40} | {1,-9}", uiBookAddTitel, uiBookAddAuthor);
+                        Console.WriteLine("{0,-40} | {1,-26}", uiBookAddTitel, uiBookAddAuthor);
 
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
@@ -141,6 +141,8 @@ namespace Bibliothek_Liste
                                 // Erstellt ein neues Buch-Objekt mit den eingegebenen Daten und fügt es zur Inventarliste hinzu.
                                 buecher_inventar.Add(new Buch() { Titel = uiBookAddTitel, Author = uiBookAddAuthor });
                                 // Sortiert die Liste erneut, damit das neue Buch an der richtigen Stelle steht.
+                                // OrderBy gibt eine Sortierte Sequenz der Klasse Buch nach der Eigenschaft Titel zurück.
+                                // .ToList() wandelt das Ergebnis in eine Liste um.
                                 buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
                                 Console.WriteLine("");
                                 Console.WriteLine("Das Buch wurde erfolgreich hinzugefügt");
@@ -162,7 +164,7 @@ namespace Bibliothek_Liste
                         // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
                         bool buchgefunden = false;
                         Console.Clear();
-                        Console.Write("Suche nach einem Buch: ");
+                        Console.Write("Suche nach einem Buch zum ausleihen: ");
                         string suche = Console.ReadLine().ToLower();
                         // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(suche))
@@ -172,31 +174,51 @@ namespace Bibliothek_Liste
                                 //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
                                 if (buecher_inventar[i].Titel.ToLower().Contains(suche))
                                 {
+                                    bool ausgeliehenGefunden = false;
                                     buchgefunden = true;
                                     //gefundenes Buch wird angezeigt.
-                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
-                                    Console.WriteLine("____________________________________________________________________");
-                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
-                                    Console.WriteLine("\nWollen sie dieses Buch ausleihen y/n:");
+                                    Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                                    Console.WriteLine("______________________________________________________________________________");
+                                    Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buecher_inventar[i].Titel, buecher_inventar[i].Author, buecher_inventar[i].Anzahl);
+                                    Console.Write("\nWollen sie dieses Buch ausleihen y/n: ");
                                     string auswahlverschieben = Console.ReadLine();
 
-                                    if (auswahlverschieben=="y")
+                                    if (auswahlverschieben.ToLower() == "y" && buecher_inventar[i].Anzahl > 0)//es wird die Eingabe geprüft und ob das Buch in ausreichender Anzahl vorhanden ist
                                     {
                                         // Fügt das Buch zur Liste der ausgeliehenen Bücher hinzu.
-                                        buecher_ausgeliehen.Add(buecher_inventar[i]);
-                                        // Entfernt das Buch aus der Inventarliste.
-                                        buecher_inventar.RemoveAt(i);
-                                        // verringert den Index um 1, da das Buch entfernt wurde.
-                                        --i;
+                                        for (int j = 0; j < buecher_ausgeliehen.Count; j++)
+                                        {
+                                            // Vergleicht das auszuleihende Buch mit den bereits ausgeliehenen Büchern
+                                            if (buecher_ausgeliehen[j].Titel == buecher_inventar[i].Titel && buecher_ausgeliehen[j].Author == buecher_inventar[i].Author)
+                                            {
+                                                buecher_ausgeliehen[j].Anzahl++; // Erhöhe Anzahl
+                                                ausgeliehenGefunden = true;
+                                            }
+                                        }
+                                        // Wenn das Buch noch nicht vorhanden ist wird es hinzugefügt
+                                        if (!ausgeliehenGefunden)
+                                        {
+                                            buecher_ausgeliehen.Add(new Buch() { Titel = buecher_inventar[i].Titel, Author = buecher_inventar[i].Author, Anzahl = 1 });
+                                            buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
+                                        }
+
+                                        // Verringert die Anzahl des Buches im Inventar um 1
+                                        buecher_inventar[i].Anzahl--;
+
                                         Console.WriteLine("Buch wurde ausgeliehen");
                                     }
+
+                                    else if (auswahlverschieben.ToLower() == "y" && buecher_inventar[i].Anzahl == 0)
+                                    {
+                                        Console.WriteLine("Buch nicht verfügbar");
+                                    }
+
                                     else //wenn das Buch nicht ausgeliehen werden soll
                                     {
                                         Console.WriteLine("Buch nicht ausgeliehen");
                                     }
-                                    {
-                                        Console.WriteLine("Buch nicht ausgeliehen");
-                                    }
+
+
                                     Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                     Console.ReadKey();
                                 }
@@ -219,53 +241,125 @@ namespace Bibliothek_Liste
                     // Fall 4: Buch zurückgeben
                     case "4":
 
+                        // Variable, um zu prüfen, ob ein passendes Buch gefunden wurde.
                         buchgefunden = false;
                         Console.Clear();
-                        Console.Write("Suche nach einem Buch: ");
-                        suche = "";
+                        Console.Write("Suche nach einem Buch zum zurückgeben: ");
                         suche = Console.ReadLine().ToLower();
+                        // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(suche))
                         {
                             for (int i = 0; i < buecher_ausgeliehen.Count; i++)
                             {
-                                if (buecher_ausgeliehen[i].Titel.ToLower().Contains(suche))
+                                bool inventarGefunden = false;
+                                //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
+                                if (buecher_ausgeliehen[i].Titel.ToLower().Contains(suche) && buecher_ausgeliehen[i].Anzahl > 0)
                                 {
                                     buchgefunden = true;
-
-                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
-                                    Console.WriteLine("____________________________________________________________________");
-                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_ausgeliehen[i].Titel, buecher_ausgeliehen[i].Author);
-                                    Console.WriteLine("\nWollen sie dieses Buch zurückgeben y/n:");
+                                    //gefundenes Buch wird angezeigt.
+                                    Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                                    Console.WriteLine("______________________________________________________________________________");
+                                    Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buecher_ausgeliehen[i].Titel, buecher_ausgeliehen[i].Author, buecher_ausgeliehen[i].Anzahl);
+                                    Console.Write("\nWollen sie dieses Buch zurückgeben y/n: ");
                                     string auswahlverschieben = Console.ReadLine();
 
-                                    if (auswahlverschieben == "y")
+                                    if (auswahlverschieben.ToLower() == "y")
                                     {
-                                        buecher_inventar.Add(buecher_ausgeliehen[i]);
-                                        buecher_ausgeliehen.RemoveAt(i);
-                                        --i;
-                                        Console.WriteLine("Buch wurde zurückgegeben");
+                                        // Das Buch wird in die Inventarliste zurückgegeben. Und gegebenenfalls gelöscht.
+
+                                        for (int j = 0; j < buecher_inventar.Count; j++)
+                                        {
+                                            // Vergleicht das zurückzugebene Buch mit den bereits Inventar Büchern
+                                            if (buecher_inventar[j].Titel == buecher_ausgeliehen[i].Titel && buecher_inventar[j].Author == buecher_ausgeliehen[i].Author)
+                                            {
+                                                buecher_inventar[j].Anzahl++; // Erhöhe Anzahl
+                                                inventarGefunden = true;
+                                            }
+                                        }
+
+                                        // Verringert die Anzahl des Buches im in der Ausgeliehen Liste um 1
+                                        buecher_ausgeliehen[i].Anzahl--;
+
+                                        Console.WriteLine("Buch wurde ausgeliehen");
+
+                                        if (buecher_ausgeliehen[i].Anzahl == 0)
+                                        {
+                                            buecher_ausgeliehen.RemoveAt(i); // Entferne aus der Liste
+                                            --i; // Korrigiere Schleifenzähler !!!
+                                        }
                                     }
-                                    else
+
+
+                                    else //wenn das Buch nicht ausgeliehen werden soll
                                     {
-                                        Console.WriteLine("Buch nicht zurückgegeben");
+                                        Console.WriteLine("Buch nicht ausgeliehen");
                                     }
+
                                     Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                     Console.ReadKey();
                                 }
                             }
-                            if (!buchgefunden)
+                            if (!buchgefunden) // Wenn kein passendes Buch gefunden wurde
                             {
                                 Console.WriteLine("\nBuch nicht gefunden.");
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
                             }
                         }
-                        else
+                        else // Falls der Benutzer nichts eingegeben hat.
                         {
                             Console.WriteLine("\nLeere Sucheingabe.");
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                             Console.ReadKey();
                         }
+                        /* buchgefunden = false;
+                         Console.Clear();
+                         Console.Write("Suche nach einem Buch: ");
+                         suche = "";
+                         suche = Console.ReadLine().ToLower();
+                         if (!string.IsNullOrEmpty(suche))
+                         {
+                             for (int i = 0; i < buecher_ausgeliehen.Count; i++)
+                             {
+                                 if (buecher_ausgeliehen[i].Titel.ToLower().Contains(suche))
+                                 {
+                                     buchgefunden = true;
+
+                                     Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
+                                     Console.WriteLine("____________________________________________________________________");
+                                     Console.WriteLine("{0,-40} | {1,-26}", buecher_ausgeliehen[i].Titel, buecher_ausgeliehen[i].Author);
+                                     Console.WriteLine("\nWollen sie dieses Buch zurückgeben y/n:");
+                                     string auswahlverschieben = Console.ReadLine();
+
+                                     if (auswahlverschieben == "y")
+                                     {
+                                         buecher_inventar.Add(buecher_ausgeliehen[i]);
+                                         buecher_ausgeliehen.RemoveAt(i);
+                                         --i;
+                                         Console.WriteLine("Buch wurde zurückgegeben");
+                                     }
+                                     else
+                                     {
+                                         Console.WriteLine("Buch nicht zurückgegeben");
+                                     }
+                                     Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                     Console.ReadKey();
+                                 }
+                             }
+                             if (!buchgefunden)
+                             {
+                                 Console.WriteLine("\nBuch nicht gefunden.");
+                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                                 Console.ReadKey();
+                             }
+                         }
+                         else
+                         {
+                             Console.WriteLine("\nLeere Sucheingabe.");
+                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                             Console.ReadKey();
+                         }
+                        */
                         break;
 
                     // Fall 5: Ausgeliehene Bücher anzeigen
@@ -273,11 +367,11 @@ namespace Bibliothek_Liste
 
                         Console.Clear();
                         Console.WriteLine("\nAusgeliehene Buecher:");
-                        Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
-                        Console.WriteLine("____________________________________________________________________");
+                        Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
+                        Console.WriteLine("______________________________________________________________________________");
                         foreach (var buch in buecher_ausgeliehen)
                         {
-                            Console.WriteLine("{0,-40} | {1,-9}", buch.Titel, buch.Author);
+                            Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buch.Titel, buch.Author, buch.Anzahl);
                         }
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
@@ -304,9 +398,9 @@ namespace Bibliothek_Liste
                                 {
                                     buchgefunden = true;
 
-                                    Console.WriteLine("{0,-40} | {1,-9}", "Buch", "Autor");
+                                    Console.WriteLine("{0,-40} | {1,-26}", "Buch", "Autor");
                                     Console.WriteLine("____________________________________________________________________");
-                                    Console.WriteLine("{0,-40} | {1,-9}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
+                                    Console.WriteLine("{0,-40} | {1,-26}", buecher_inventar[i].Titel, buecher_inventar[i].Author);
                                     Console.WriteLine("\nWollen sie dieses Buch löschen? y/n:");
                                     string auswahlloeschen = Console.ReadLine();
 
@@ -386,7 +480,8 @@ namespace Bibliothek_Liste
                         Console.WriteLine("Eingabe Fehlerhaft");
                         Console.WriteLine("Bitte wiederholen Sie ihre Eingabe.");
                         break;
-                };
+                }
+                ;
                 Console.WriteLine();
                 Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
                 Console.ReadKey();
