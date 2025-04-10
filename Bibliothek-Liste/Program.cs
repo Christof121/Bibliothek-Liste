@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Bibliothek_Methoden
 {
     class Buch // Definiert eine Klasse namens 'Buch', die als Vorlage für Buch-Objekte dient.
+        //public bedeutet dass man von überall im Programm darauf zugreifen kann
     {   // Eigenschaften 'Titel' , 'Autor' und 'Anzahl' werden erstellt. 
         // 'get; set;' erstellt die Getter- und Setter-Methoden, 
         // um den Wert der Eigenschaft zu lesen und zu schreiben.
@@ -19,8 +20,11 @@ namespace Bibliothek_Methoden
     internal class Program
     {
         //können auch zb als static List<Buch> (Übergabeargumente); deklariert werden um Buchlisten direkt darin zu verarbeiten und auch wieder ausgeben zu können.
+
+        //Formatierte Ausgabe der Bücher
         static void Buchausgabe(List<Buch> buecher_ausgabe)
         {
+            // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
             Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
             Console.WriteLine("______________________________________________________________________________");
 
@@ -30,6 +34,14 @@ namespace Bibliothek_Methoden
             }
 
         }
+        //Beim nächsten mal auch suche auslagern
+
+        // Diese Methode verarbeitet Aktionen (Ausleihen, Zurückgeben, Löschen) basierend auf einer Suchergebnisliste.
+        // Parameter:
+        // - buecher_input: Die Liste der Bücher die bei der Suche gefunden wurden.
+        // - buecher_inventar: Liste der Bücher im Inventar.
+        // - buecher_ausgeliehen: Die Liste der aktuell ausgeliehenen Bücher.
+        // - operation: Eine Zahl, die die auszuführende Aktion bestimmt (1=Ausleihen, 2=Zurückgeben, 3=Löschen).
         static void Buchbearbeitung(List<Buch> buecher_input, List<Buch> buecher_inventar, List<Buch> buecher_ausgeliehen, int operation)
         {
             int i = 0;
@@ -97,7 +109,7 @@ namespace Bibliothek_Methoden
                             ausgeliehenGefunden = true;
                         }
                     }
-                    // Wenn das Buch noch nicht vorhanden ist wird es hinzugefügt
+                    // Sollte das Buch fehlen da es gelöscht wurde obwohl noch eins ausgeliehen war wird es wieder hinzugefügt
                     if (!ausgeliehenGefunden)
                     {
                         buecher_inventar.Add(new Buch() { Titel = buecher_input[indexInt].Titel, Autor = buecher_input[indexInt].Autor, Anzahl = 1 });
@@ -128,11 +140,12 @@ namespace Bibliothek_Methoden
                     Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
                     Console.WriteLine("______________________________________________________________________________");
                     Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", buecher_input[indexInt].Titel, buecher_input[indexInt].Autor, buecher_input[indexInt].Anzahl);
-
+                    //Sicherheitsabfrage
                     Console.Write("Wollen Sie dieses Buch wirklich löschen? y/n:");
                     string auswahlloeschen = Console.ReadLine().ToLower();
                     if (auswahlloeschen == "y")
                     {
+                        //Alle exemplare löschen
                         Buch buchzuloeaschen = buecher_input[indexInt];
                         Console.Write("Wollen sie alle Exemplare entfernen? y/n:");
                         auswahlloeschen = Console.ReadLine().ToLower();
@@ -143,6 +156,7 @@ namespace Bibliothek_Methoden
                         }
                         else
                         {
+                            //Anzahl der Exemplare löschen
                             Console.WriteLine("Wie viele Exemplare wollen sie löschen?");
                             Console.WriteLine("Sinkt die Anzahl auf 0 wird der ganze Eintrag gelöscht");
                             Console.WriteLine("Mit x können Sie abbrechen");
@@ -154,7 +168,7 @@ namespace Bibliothek_Methoden
                                 if (eingabeInt > 0)
                                 {
                                     buecher_input[indexInt].Anzahl -= eingabeInt;
-                                    if (buecher_input[indexInt].Anzahl <= 0) buecher_inventar.Remove(buchzuloeaschen);  // Entferne aus der Liste
+                                    if (buecher_input[indexInt].Anzahl <= 0) buecher_inventar.Remove(buchzuloeaschen);  // Entferne aus der Liste wenn anzahl <0
                                     Console.WriteLine("Buch wurde gelöscht");
                                 }
                                 else Console.WriteLine("Fehlerhafte Eingabe");
@@ -256,8 +270,10 @@ namespace Bibliothek_Methoden
                         string sortWahlstandard = "t"; // Standardmäßig nach Titel sortieren
                         buecher_inventar = buecher_inventar.OrderBy(Buch => Buch.Titel).ToList();
 
+                        // Prüft, ob der Benutzer überhaupt etwas eingegeben hat.
                         if (!string.IsNullOrEmpty(sortWahl))
                         {
+                            // Wenn etwas eingegeben wurde, überschreibe den Standard mit der Benutzereingabe
                             sortWahlstandard = sortWahl.ToLower();
                         }
 
@@ -275,6 +291,7 @@ namespace Bibliothek_Methoden
                             Console.WriteLine("\nBücher Inventar (sortiert nach Autor):");
                         }
 
+                        // Ruft die Methode zur formatierten Ausgabe der Liste auf und übergibt diese.
                         Buchausgabe(buecher_inventar);
 
                         // Sortiere die Liste zurück nach Titel    
@@ -371,6 +388,13 @@ namespace Bibliothek_Methoden
                                         j++;
                                     }
                                 }
+
+                                // ...rufe die Bearbeitungsmethode auf.
+                                // Übergebe:
+                                // - die Suchergebnisliste ('ausleihen') zur Auswahl
+                                // - die Inventarliste (für Bestandsänderungen)
+                                // - die Ausleihliste (zum Hinzufügen)
+                                // - die Operationsnummer (1 für Ausleihen)
                                 Buchbearbeitung(ausleihen, buecher_inventar, buecher_ausgeliehen, 1);
                                 Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                                 Console.ReadKey();
