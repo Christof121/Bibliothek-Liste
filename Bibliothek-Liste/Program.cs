@@ -22,6 +22,11 @@ namespace Bibliothek_Methoden
         //können auch zb als static List<Buch> (Übergabeargumente); deklariert werden um Buchlisten direkt darin zu verarbeiten und auch wieder ausgeben zu können.
 
         //Formatierte Ausgabe der Bücher
+
+        /// <summary>
+        /// Gibt die Liste als formatierte Tabelle aus ( Titel | Autor | Anzahl )
+        /// </summary>
+        /// <param name="buecher_ausgabe">Liste welche Formatiert werden soll</param>
         static void Buchausgabe(List<Buch> buecher_ausgabe)
         {
             // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
@@ -42,6 +47,14 @@ namespace Bibliothek_Methoden
         // - buecher_inventar: Liste der Bücher im Inventar.
         // - buecher_ausgeliehen: Die Liste der aktuell ausgeliehenen Bücher.
         // - operation: Eine Zahl, die die auszuführende Aktion bestimmt (1=Ausleihen, 2=Zurückgeben, 3=Löschen).
+        
+        /// <summary>
+        /// Buchbearbeitung
+        /// </summary>
+        /// <param name="buecher_input">Die Liste der Bücher, die bei der Suche gefunden wurden.</param>
+        /// <param name="buecher_inventar">Liste der Bücher im Inventar.</param>
+        /// <param name="buecher_ausgeliehen">Die Liste der aktuell ausgeliehenen Bücher.</param>
+        /// <param name="operation">Eine Zahl, die die auszuführende Aktion bestimmt (1=Ausleihen, 2=Zurückgeben, 3=Löschen).</param>
         static void Buchbearbeitung(List<Buch> buecher_input, List<Buch> buecher_inventar, List<Buch> buecher_ausgeliehen, int operation)
         {
             int i = 0;
