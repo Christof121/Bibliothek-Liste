@@ -22,6 +22,11 @@ namespace Bibliothek_Methoden
         //können auch zb als static List<Buch> (Übergabeargumente); deklariert werden um Buchlisten direkt darin zu verarbeiten und auch wieder ausgeben zu können.
 
         //Formatierte Ausgabe der Bücher
+
+        /// <summary>
+        /// Gibt die Liste als formatierte Tabelle aus ( Titel | Autor | Anzahl )
+        /// </summary>
+        /// <param name="buecher_ausgabe">Liste welche Formatiert werden soll</param>
         static void Buchausgabe(List<Buch> buecher_ausgabe)
         {
             // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
@@ -42,6 +47,14 @@ namespace Bibliothek_Methoden
         // - buecher_inventar: Liste der Bücher im Inventar.
         // - buecher_ausgeliehen: Die Liste der aktuell ausgeliehenen Bücher.
         // - operation: Eine Zahl, die die auszuführende Aktion bestimmt (1=Ausleihen, 2=Zurückgeben, 3=Löschen).
+        
+        /// <summary>
+        /// Buchbearbeitung
+        /// </summary>
+        /// <param name="buecher_input">Die Liste der Bücher, die bei der Suche gefunden wurden.</param>
+        /// <param name="buecher_inventar">Liste der Bücher im Inventar.</param>
+        /// <param name="buecher_ausgeliehen">Die Liste der aktuell ausgeliehenen Bücher.</param>
+        /// <param name="operation">Eine Zahl, die die auszuführende Aktion bestimmt (1=Ausleihen, 2=Zurückgeben, 3=Löschen).</param>
         static void Buchbearbeitung(List<Buch> buecher_input, List<Buch> buecher_inventar, List<Buch> buecher_ausgeliehen, int operation)
         {
             int i = 0;
@@ -62,7 +75,8 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
-                    for (int j = 0; j < buecher_inventar.Count; j++)
+                    Console.WriteLine($"Debug Inv Count {buecher_inventar.Count}");
+                    for (int j = 0; j < buecher_ausgeliehen.Count; j++)
                     {
 
                         // Vergleicht das auszuleihende Buch mit den bereits ausgeliehenen Büchern
@@ -192,6 +206,13 @@ namespace Bibliothek_Methoden
 
         // Diese Methode sucht in der Liste 'buecher_inventar' nach Büchern, deren Titel den Suchbegriff enthält.
         //Parameter buecher_inventar: Die Liste der Bücher, in der gesucht werden soll. Und suche ist der Suchbegriff.
+
+        /// <summary>
+        /// Sucht nach einem String in einer Liste
+        /// </summary>
+        /// <param name="buecher_inventar">Liste welches durchsucht werden soll</param>
+        /// <param name="suche">String nach dem gescuht wird</param>
+        /// <returns>Gibt die Suchergebnisse als Liste zurück</returns>
         static List<Buch> BuecherSuche(List<Buch> buecher_inventar, string suche)
         {
             List<Buch> buecher_ergebnis = new List<Buch>();
@@ -520,7 +541,7 @@ namespace Bibliothek_Methoden
                             // - die Operationsnummer (1 für Ausleihen)
                             Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                            Console.ReadKey();
+                            Console.ReadKey();)
                         }
                         else if (string.IsNullOrEmpty(suche)) // Wenn die eingabe fehlerhaft ist
                         {
