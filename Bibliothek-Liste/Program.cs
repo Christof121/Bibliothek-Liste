@@ -361,7 +361,7 @@ namespace Bibliothek_Methoden
                         string uiBookAddTitel = Console.ReadLine();
                         Console.Write($"\nGeben Sie den Autor an: ");
                         string uiBookAddAutor = Console.ReadLine();
-                        Console.Write("Geben Sie die Anzahl an: ");
+                        Console.Write("\nGeben Sie die Anzahl an: ");
                         int uiBookAddAnzahl = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine($"\n\nFolgendes Buch wird hinzugefügt");
 
@@ -683,36 +683,40 @@ namespace Bibliothek_Methoden
                     // Fall 5: Ausgeliehene Bücher anzeigen
                     case "5":
                         Console.Clear();
-                        Console.Write("Wie möchten Sie die Liste sortieren? ([T]itel / [A]utor): ");
-                        sortWahl = Console.ReadLine();
-                        sortWahlstandard = "t"; // Standardmäßig nach Titel sortieren
-                        buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
-
-                        if (!string.IsNullOrEmpty(sortWahl))
+                        if (buecher_ausgeliehen.Count == 0)
                         {
-                            sortWahlstandard = sortWahl.ToLower();
+                            Console.WriteLine("Es sind keine Bücher ausgeliehen.");
                         }
-
-                        if (sortWahlstandard == "t" || sortWahlstandard == "titel")
+                        else
                         {
-                            // Sortiere die Liste nach Titel
+
+                            Console.Write("Wie möchten Sie die Liste sortieren? ([T]itel / [A]utor): ");
+                            sortWahl = Console.ReadLine();
+                            sortWahlstandard = "t"; // Standardmäßig nach Titel sortieren
                             buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
-                            Console.WriteLine("\nAusgeliehene Bücher (sortiert nach Titel):");
+
+                            if (!string.IsNullOrEmpty(sortWahl))
+                            {
+                                sortWahlstandard = sortWahl.ToLower();
+                            }
+
+                            if (sortWahlstandard == "t" || sortWahlstandard == "titel")
+                            {
+                                // Sortiere die Liste nach Titel
+                                buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
+                                Console.WriteLine("\nAusgeliehene Bücher (sortiert nach Titel):");
+                            }
+
+                            else if (sortWahlstandard == "a" || sortWahlstandard == "autor")
+                            {
+                                // Sortiere die Liste nach Autor
+                                buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Autor).ToList();
+                                Console.WriteLine("\nAusgeliehene Bücher (sortiert nach Autor):");
+                            }
+                            Buchausgabe(buecher_ausgeliehen);
+                            // Sortiere die Liste zurück nach Titel    
+                            if (sortWahlstandard == "a" || sortWahlstandard == "autor") buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
                         }
-
-                        else if (sortWahlstandard == "a" || sortWahlstandard == "autor")
-                        {
-                            // Sortiere die Liste nach Autor
-                            buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Autor).ToList();
-                            Console.WriteLine("\nAusgeliehene Bücher (sortiert nach Autor):");
-                        }
-
-                        if (buecher_ausgeliehen.Count != 0) Buchausgabe(buecher_ausgeliehen);
-                        else Console.WriteLine("Es sind keine Bücher ausgeliehen.");
-
-                        // Sortiere die Liste zurück nach Titel    
-                        if (sortWahlstandard == "a" || sortWahlstandard == "autor") buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
-
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
                         break;
