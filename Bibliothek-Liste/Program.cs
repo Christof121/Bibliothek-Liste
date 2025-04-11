@@ -62,7 +62,7 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
-                    for (int j = 0; j < buecher_inventar.Count; j++)
+                    for (int j = 0; j < buecher_ausgeliehen.Count; j++)
                     {
 
                         // Vergleicht das auszuleihende Buch mit den bereits ausgeliehenen Büchern
@@ -192,9 +192,9 @@ namespace Bibliothek_Methoden
 
         // Diese Methode sucht in der Liste 'buecher_inventar' nach Büchern, deren Titel den Suchbegriff enthält.
         //Parameter buecher_inventar: Die Liste der Bücher, in der gesucht werden soll. Und suche ist der Suchbegriff.
-        static List<Buch> BuecherSuche(List<Buch> buecher_inventar, string suche)
+        static List<Buch> BuecherSuche(List<Buch> buecher_inventar, string suche,out  List<Buch> buecher_ergebnis)
         {
-            List<Buch> buecher_ergebnis = new List<Buch>();
+            buecher_ergebnis = new List<Buch>();
             for (int i = 0; i < buecher_inventar.Count; i++)
             {
                 //mit Contains wird überprüft ob der Titel des Buches den Suchbegriff enthält
@@ -203,7 +203,7 @@ namespace Bibliothek_Methoden
                     buecher_ergebnis.Add(buecher_inventar[i]);
                 }
             }
-            return buecher_ergebnis;
+            return buecher_ergebnis;                    
         }
 
         static void Main(string[] args)
@@ -390,8 +390,8 @@ namespace Bibliothek_Methoden
                         // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(suche))
                         {
-
-                            suchergebnissliste = BuecherSuche(buecher_inventar, suche);
+                            suchergebnissliste.Clear();
+                            BuecherSuche(buecher_inventar, suche,out suchergebnissliste);
 
                             // ...rufe die Bearbeitungsmethode auf.
                             // Übergebe:
@@ -509,8 +509,8 @@ namespace Bibliothek_Methoden
                         // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(suche))
                         {
-
-                            suchergebnissliste = BuecherSuche(buecher_inventar, suche);
+                            suchergebnissliste.Clear();
+                            BuecherSuche(buecher_inventar, suche,out suchergebnissliste);
 
                             // ...rufe die Bearbeitungsmethode auf.
                             // Übergebe:
@@ -714,8 +714,8 @@ namespace Bibliothek_Methoden
                         // Prüft, ob ein Suchbegriff eingegeben wurde.
                         if (!string.IsNullOrEmpty(uiBookRemoveTitel))
                         {
-
-                            suchergebnissliste = BuecherSuche(buecher_inventar, uiBookRemoveTitel);
+                            suchergebnissliste.Clear();
+                            BuecherSuche(buecher_inventar, uiBookRemoveTitel ,out suchergebnissliste);
 
                             // ...rufe die Bearbeitungsmethode auf.
                             // Übergebe:
