@@ -63,7 +63,7 @@ namespace Bibliothek_Methoden
             Console.WriteLine("_______________________________________________________________________________________");
             foreach (var buch in buecher_input)
             {
-                Console.WriteLine("{0,-6} | {1,-40} | {2,-26} | {3,-6}", i, buch.Titel, buch.Autor, buch.Anzahl);
+                Console.WriteLine("{0,-6} | {1,-40} | {2,-26} | {3,-6}", i + 1, buch.Titel, buch.Autor, buch.Anzahl);
                 i++;
             }
             //Bücher ausleihen
@@ -75,6 +75,7 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
+                    indexInt--;
                     for (int j = 0; j < buecher_ausgeliehen.Count; j++)
                     {
 
@@ -111,6 +112,7 @@ namespace Bibliothek_Methoden
                 {
                     bool ausgeliehenGefunden = false;
                     int.TryParse(index, out int indexInt);
+                    indexInt--;
                     Buch buchzurueckgabe = buecher_input[indexInt];
                     for (int j = 0; j < buecher_inventar.Count; j++)
                     {
@@ -525,7 +527,10 @@ namespace Bibliothek_Methoden
                         if (!string.IsNullOrEmpty(suche))
                         {
                             suchergebnissliste.Clear();
-                            BuecherSuche(buecher_inventar, suche,out suchergebnissliste);
+                            BuecherSuche(buecher_ausgeliehen, suche,out suchergebnissliste);
+
+                            if (suchergebnissliste.Count != 0) Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
+                            else Console.WriteLine($"Es sind keine Bücher mit dem Titel \"{suche}\" ausgeliehen.");
 
                             // ...rufe die Bearbeitungsmethode auf.
                             // Übergebe:
@@ -533,7 +538,7 @@ namespace Bibliothek_Methoden
                             // - die Inventarliste (für Bestandsänderungen)
                             // - die Ausleihliste (zum Hinzufügen)
                             // - die Operationsnummer (1 für Ausleihen)
-                            Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
+                            //Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                             Console.ReadKey();
                         }
