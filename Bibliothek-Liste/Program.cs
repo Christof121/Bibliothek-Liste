@@ -541,7 +541,7 @@ namespace Bibliothek_Methoden
                             // - die Operationsnummer (1 für Ausleihen)
                             Buchbearbeitung(suchergebnissliste, buecher_inventar, buecher_ausgeliehen, 2);
                             Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                            Console.ReadKey();)
+                            Console.ReadKey();
                         }
                         else if (string.IsNullOrEmpty(suche)) // Wenn die eingabe fehlerhaft ist
                         {
