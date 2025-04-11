@@ -207,6 +207,14 @@ namespace Bibliothek_Methoden
 
         // Diese Methode sucht in der Liste 'buecher_inventar' nach Büchern, deren Titel den Suchbegriff enthält.
         //Parameter buecher_inventar: Die Liste der Bücher, in der gesucht werden soll. Und suche ist der Suchbegriff.
+
+        /// <summary>
+        /// Sucht in einer Liste nach einem Suchbegriff und gibt das Ergebnis als Liste zurück
+        /// </summary>
+        /// <param name="buecher_inventar">Liste der zu durchsuchenden Liste</param>
+        /// <param name="suche">String nach dem Gesucht wird</param>
+        /// <param name="buecher_ergebnis">Liste in der die Suchergebnisse ausgegeben wird</param>
+        /// <returns>Liste der Bücher auf welche der Suchbegriff zutrifft</returns>
         static List<Buch> BuecherSuche(List<Buch> buecher_inventar, string suche,out  List<Buch> buecher_ergebnis)
         {
             buecher_ergebnis = new List<Buch>();
