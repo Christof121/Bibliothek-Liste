@@ -373,7 +373,7 @@ namespace Bibliothek_Methoden
 
                         Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
                         Console.WriteLine("______________________________________________________________________________");
-                        Console.WriteLine("{0,-40} | {1,-26} | { 2,-6}", uiBookAddTitel, uiBookAddAutor, uiBookAddAnzahl);
+                        Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", uiBookAddTitel, uiBookAddAutor, uiBookAddAnzahl);
 
                         Console.WriteLine("");
                         Console.Write("Soll das Buch hinzugefügt werden? [y/n]");
@@ -399,6 +399,8 @@ namespace Bibliothek_Methoden
                                 Console.WriteLine("Eingabe fehlerhaft");
                                 break;
                         }
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
                         break;
 
                     // Fall 3: Buch ausleihen
@@ -683,7 +685,6 @@ namespace Bibliothek_Methoden
 
                     // Fall 5: Ausgeliehene Bücher anzeigen
                     case "5":
-
                         Console.Clear();
                         Console.Write("Wie möchten Sie die Liste sortieren? ([T]itel / [A]utor): ");
                         sortWahl = Console.ReadLine();
@@ -865,10 +866,6 @@ namespace Bibliothek_Methoden
                 Console.WriteLine("Bitte wiederholen Sie ihre Eingabe.");
                 break;
             }
-                ;
-            Console.WriteLine();
-            Console.WriteLine("Drücken Sie eine beliebige Taste um fortzufahren ...");
-            Console.ReadKey();
             Console.Clear();
         } while (menue);
         }
