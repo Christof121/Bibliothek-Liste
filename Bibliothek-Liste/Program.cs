@@ -355,7 +355,6 @@ namespace Bibliothek_Methoden
                         }
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
-                        */
                         break;
 
                     // Fall 2: Neues Buch hinzufügen
@@ -725,8 +724,6 @@ namespace Bibliothek_Methoden
                             // Sortiere die Liste zurück nach Titel    
                             if (sortWahlstandard == "a" || sortWahlstandard == "autor") buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
                         }
-                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
-                        Console.ReadKey();
                         break;
 
                     // Fall 6: Buch dauerhaft aus dem Inventar entfernen
