@@ -151,6 +151,7 @@ namespace Bibliothek_Methoden
                 if (!string.IsNullOrEmpty(index) && index.ToLower() != "x")
                 {
                     int.TryParse(index, out int indexInt);
+                    indexInt--;
                     Console.Clear();
                     Console.WriteLine("{0,-40} | {1,-26} | {2,-6}", "Buch", "Autor", "Anzahl");
                     Console.WriteLine("______________________________________________________________________________");
@@ -341,8 +342,8 @@ namespace Bibliothek_Methoden
 
                         Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
                         Console.ReadKey();
-                        /*
-                        Ohne sortierungswahl
+
+                        //Ohne sortierungswahl
                         Console.Clear();
                         Console.WriteLine("\nBuecher Inventar:");
                         // {0,-40} bedeutet: Platzhalter 0, linksbündig (-), auf 40 Zeichen Breite.
@@ -724,6 +725,8 @@ namespace Bibliothek_Methoden
                             // Sortiere die Liste zurück nach Titel    
                             if (sortWahlstandard == "a" || sortWahlstandard == "autor") buecher_ausgeliehen = buecher_ausgeliehen.OrderBy(Buch => Buch.Titel).ToList();
                         }
+                        Console.WriteLine("\nBeliebige Taste drücken zum Fortfahren.");
+                        Console.ReadKey();
                         break;
 
                     // Fall 6: Buch dauerhaft aus dem Inventar entfernen
